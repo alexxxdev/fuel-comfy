@@ -105,3 +105,22 @@ interface GitHubService {
   fun get(@Body contributor: Contributor)
 }
 ```
+
+<br><br><br>
+## Installation
+Add it in your root build.gradle at the end of repositories:
+```groovy
+allprojects {
+    repositories {
+        ...
+        maven { url 'https://jitpack.io' }
+    }
+}
+```
+Add the dependency
+```groovy
+dependencies {
+    implementation 'com.github.alexxxdev.fuel-comfy:api:-SNAPSHOT'
+    kapt 'com.github.alexxxdev.fuel-comfy:processor:-SNAPSHOT'
+}
+```
