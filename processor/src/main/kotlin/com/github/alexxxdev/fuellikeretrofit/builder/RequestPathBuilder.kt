@@ -18,16 +18,16 @@ class RequestPathBuilder {
     }
 
     fun build(): String {
-        method?.let {
-            var request = it.second
+        method?.let { pair ->
+            var request = pair.second
             val regex = """\{\w+\}""".toRegex()
             val matchResults: Sequence<MatchResult> = regex.findAll(request)
 
             matchResults.forEach { result ->
                 val substring = result.value.substring(1..(result.value.length - 2))
                 parameters.filterValues { it.annotation is Param && it.annotation.value == substring }
-                    .forEach {
-                        val p = """${'$'}{${it.key}}"""
+                    .forEach { entry ->
+                        val p = """${'$'}{${entry.key}}"""
                         request = request.replace(result.value, p)
                         return@forEach
                     }

@@ -53,8 +53,8 @@ detekt {
     config = files("${project.rootDir}/detekt/detekt-config.yml")
     //baseline = file("${project.rootDir}/detekt/baseline.xml")
     input = files(
-            "${project.rootDir}/app/src/main/kotlin",
-            "${project.rootDir}/lib/src/main/kotlin"
+            "${project.rootDir}/api/src/main/kotlin",
+            "${project.rootDir}/processor/src/main/kotlin"
     )
     filters = ".*/resources/.*,.*/build/.*"
     reports {

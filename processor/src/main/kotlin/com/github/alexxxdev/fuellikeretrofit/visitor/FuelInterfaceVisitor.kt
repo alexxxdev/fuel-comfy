@@ -31,8 +31,8 @@ class FuelInterfaceVisitor(
     private val initBuilder = InitBuilder(original, messager)
 
     override fun visitType(element: TypeElement?, p1: Any?): Any? {
-        element?.let {
-            if (it.kind == ElementKind.INTERFACE) {
+        element?.let { element ->
+            if (element.kind == ElementKind.INTERFACE) {
                 val packageName = elementUtils.getPackageOf(element).qualifiedName.toString()
                 val className = element.simpleName.toString()
                 file = FileSpec.builder(packageName, className + SUFFIX)

@@ -49,58 +49,65 @@ class FunSpecBodyBuilder(private val element: ExecutableElement, private val mes
                     import(import)
                 })
 
-            if (returnType is ParameterizedTypeName) {
-                when ((returnType as ParameterizedTypeName).typeArguments[0]) {
-                    is ClassName -> {
-                        statement(
-                            "\t.responseObject(%T<%T>(%T.serializer()))",
-                            arrayOf(
-                                ClassName("com.github.kittinunf.fuel.serialization", "kotlinxDeserializerOf"),
-                                //todo only List<T>
-                                (returnType as ParameterizedTypeName).typeArguments[0],
-                                (returnType as ParameterizedTypeName).typeArguments[0]
-                            )
-                        )
-                    }
-                    is ParameterizedTypeName -> {
-                        when (((returnType as ParameterizedTypeName).typeArguments[0] as ParameterizedTypeName).rawType.javaToKotlinType()) {
-                            List::class.asTypeName() -> buildForList(statement, import)
-                            Set::class.asTypeName() -> buildForSet(statement, import)
-                            Map::class.asTypeName() -> buildForMap(statement, import)
-                            ARRAY -> buildForArray(statement, import)
-                            else -> buildForParameterizedClass(statement, import)
-                        }
-
-                    }
-                }
-            }
-
-            statement("return response.third", emptyArray())
+            buildReturn(statement, import)
         }
     }
 
+    private fun buildReturn(
+        statement: (String, Array<Any>) -> Unit,
+        import: (ClassName) -> Unit
+    ) {
+        if (returnType is ParameterizedTypeName) {
+            when ((returnType as ParameterizedTypeName).typeArguments[0]) {
+                is ClassName -> {
+                    statement(
+                        "\t.responseObject(%T<%T>(%T.serializer()))",
+                        arrayOf(
+                            ClassName("com.github.kittinunf.fuel.serialization", "kotlinxDeserializerOf"),
+                            // todo only List<T>
+                            (returnType as ParameterizedTypeName).typeArguments[0],
+                            (returnType as ParameterizedTypeName).typeArguments[0]
+                        )
+                    )
+                }
+                is ParameterizedTypeName -> {
+                    when (((returnType as ParameterizedTypeName).typeArguments[0] as ParameterizedTypeName).rawType.javaToKotlinType()) {
+                        List::class.asTypeName() -> buildForList(statement, import)
+                        Set::class.asTypeName() -> buildForSet(statement, import)
+                        Map::class.asTypeName() -> buildForMap(statement, import)
+                        ARRAY -> buildForArray(statement, import)
+                        else -> buildForParameterizedClass(statement, import)
+                    }
+                }
+            }
+        }
+
+        statement("return response.third", emptyArray())
+    }
+
     private fun buildForParameterizedClass(statement: (String, Array<Any>) -> Unit, import: (ClassName) -> Unit) {
-        if (((returnType as ParameterizedTypeName).typeArguments[0] as ParameterizedTypeName).typeArguments[0] is ClassName) {
+        val param = (returnType as ParameterizedTypeName).typeArguments[0]
+        if ((param as ParameterizedTypeName).typeArguments[0] is ClassName) {
             statement(
                 "\t.responseObject(%T<%T>(%T.serializer(%T.serializer())))",
                 arrayOf(
                     ClassName("com.github.kittinunf.fuel.serialization", "kotlinxDeserializerOf"),
-                    (returnType as ParameterizedTypeName).typeArguments[0],
-                    ((returnType as ParameterizedTypeName).typeArguments[0] as ParameterizedTypeName).rawType.javaToKotlinType(),
-                    ((returnType as ParameterizedTypeName).typeArguments[0] as ParameterizedTypeName).typeArguments[0]
+                    param,
+                    (param as ParameterizedTypeName).rawType.javaToKotlinType(),
+                    (param as ParameterizedTypeName).typeArguments[0]
                 )
             )
-        } else if (((returnType as ParameterizedTypeName).typeArguments[0] as ParameterizedTypeName).typeArguments[0] is ParameterizedTypeName) {
-            when ((((returnType as ParameterizedTypeName).typeArguments[0] as ParameterizedTypeName).typeArguments[0] as ParameterizedTypeName).rawType.javaToKotlinType()) {
+        } else if ((param as ParameterizedTypeName).typeArguments[0] is ParameterizedTypeName) {
+            when (((param as ParameterizedTypeName).typeArguments[0] as ParameterizedTypeName).rawType.javaToKotlinType()) {
                 List::class.asTypeName() -> {
                     import(ClassName("kotlinx.serialization", "list"))
                     statement(
                         "\t.responseObject(%T<%T>(%T.serializer(%T.serializer().list)))",
                         arrayOf(
                             ClassName("com.github.kittinunf.fuel.serialization", "kotlinxDeserializerOf"),
-                            (returnType as ParameterizedTypeName).typeArguments[0],
-                            ((returnType as ParameterizedTypeName).typeArguments[0] as ParameterizedTypeName).rawType.javaToKotlinType(),
-                            (((returnType as ParameterizedTypeName).typeArguments[0] as ParameterizedTypeName).typeArguments[0] as ParameterizedTypeName).typeArguments[0].javaToKotlinType()
+                            param,
+                            param.rawType.javaToKotlinType(),
+                            (param.typeArguments[0] as ParameterizedTypeName).typeArguments[0].javaToKotlinType()
                         )
                     )
                 }
@@ -110,29 +117,30 @@ class FunSpecBodyBuilder(private val element: ExecutableElement, private val mes
                         "\t.responseObject(%T<%T>(%T.serializer(%T.serializer().set)))",
                         arrayOf(
                             ClassName("com.github.kittinunf.fuel.serialization", "kotlinxDeserializerOf"),
-                            (returnType as ParameterizedTypeName).typeArguments[0],
-                            ((returnType as ParameterizedTypeName).typeArguments[0] as ParameterizedTypeName).rawType.javaToKotlinType(),
-                            (((returnType as ParameterizedTypeName).typeArguments[0] as ParameterizedTypeName).typeArguments[0] as ParameterizedTypeName).typeArguments[0].javaToKotlinType()
+                            param,
+                            param.rawType.javaToKotlinType(),
+                            (param.typeArguments[0] as ParameterizedTypeName).typeArguments[0].javaToKotlinType()
                         )
                     )
                 }
                 Map::class.asTypeName() -> {
                     import(ClassName("kotlinx.serialization", "map"))
                     import(ClassName("kotlinx.serialization", "serializer"))
+                    val map = returnType as ParameterizedTypeName
+                    val param = map.typeArguments[0] as ParameterizedTypeName
                     statement(
                         "\t.responseObject(%T<%T>(%T.serializer((%T.serializer() to %T.serializer()).map)))",
                         arrayOf(
                             ClassName("com.github.kittinunf.fuel.serialization", "kotlinxDeserializerOf"),
-                            (returnType as ParameterizedTypeName).typeArguments[0],
-                            ((returnType as ParameterizedTypeName).typeArguments[0] as ParameterizedTypeName).rawType.javaToKotlinType(),
-                            (((returnType as ParameterizedTypeName).typeArguments[0] as ParameterizedTypeName).typeArguments[0] as ParameterizedTypeName).typeArguments[0].javaToKotlinType(),
-                            (((returnType as ParameterizedTypeName).typeArguments[0] as ParameterizedTypeName).typeArguments[0] as ParameterizedTypeName).typeArguments[1].javaToKotlinType()
+                            map,
+                            param.rawType.javaToKotlinType(),
+                            (param.typeArguments[0] as ParameterizedTypeName).typeArguments[0].javaToKotlinType(),
+                            (param.typeArguments[0] as ParameterizedTypeName).typeArguments[1].javaToKotlinType()
                         )
                     )
                 }
                 ARRAY -> buildForArray(statement, import)
                 else -> {
-
                 }
             }
         }
@@ -141,7 +149,9 @@ class FunSpecBodyBuilder(private val element: ExecutableElement, private val mes
     private fun buildForArray(statement: (String, Array<Any>) -> Unit, import: (ClassName) -> Unit) {
         messager.printMessage(
             Diagnostic.Kind.ERROR,
-            "return type only " + Result::class.java.canonicalName + "<V,E> V:" + ((returnType as ParameterizedTypeName).typeArguments[0] as ParameterizedTypeName).rawType.canonicalName + " - only List, Set, Map, CustomClass",
+            "return type only " + Result::class.java.canonicalName + "<V,E> V:" +
+                    ((returnType as ParameterizedTypeName).typeArguments[0] as ParameterizedTypeName).rawType.canonicalName +
+                    " - only List, Set, Map, CustomClass",
             element
         )
     }

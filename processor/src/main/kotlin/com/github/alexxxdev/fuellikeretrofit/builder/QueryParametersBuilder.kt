@@ -8,30 +8,46 @@ class QueryParametersBuilder {
 
     fun build(): String {
         var query = ""
-        var firstMap = true
+        val pair = buildQueryMap(query)
+        query = pair.second
+        query = buildQuery(pair.first, query)
+        return query
+    }
+
+    private fun buildQuery(
+        firstMap: Boolean,
+        query: String
+    ): String {
+        var query1 = query
         var firstList = true
-        parameters.filterValues { it.annotation is QueryMap }
-            .forEach {
-                if (firstMap) {
-                    query = ", ${it.key}.toList()"
-                    firstMap = false
-                } else {
-                    query += ".plus(${it.key}.toList())"
-                }
-            }
-        parameters.filterValues { it.annotation is Query }.map { it.value }.forEach {
-            it.annotation as Query
+        parameters.filterValues { it.annotation is Query }.map { it.value }.forEach { param ->
+            param.annotation as Query
             if (!firstMap) {
-                query += ".plus(" + "\"${it.annotation.value}\" to ${it.parameterSpec.name}" + ")"
+                query1 += ".plus(" + "\"${param.annotation.value}\" to ${param.parameterSpec.name}" + ")"
             } else if (firstList) {
-                query += ", listOf(" + "\"${it.annotation.value}\" to ${it.parameterSpec.name}" + ""
+                query1 += ", listOf(" + "\"${param.annotation.value}\" to ${param.parameterSpec.name}" + ""
                 firstList = false
             } else {
-                query += ", \"${it.annotation.value}\" to ${it.parameterSpec.name}" + ""
+                query1 += ", \"${param.annotation.value}\" to ${param.parameterSpec.name}" + ""
             }
         }
-        if (firstMap && !firstList) query += ")"
-        return query
+        if (firstMap && !firstList) query1 += ")"
+        return query1
+    }
+
+    private fun buildQueryMap(query: String): Pair<Boolean, String> {
+        var firstMap = true
+        var query1 = query
+        parameters.filterValues { it.annotation is QueryMap }
+            .forEach { entry ->
+                if (firstMap) {
+                    query1 = ", ${entry.key}.toList()"
+                    firstMap = false
+                } else {
+                    query1 += ".plus(${entry.key}.toList())"
+                }
+            }
+        return Pair(firstMap, query1)
     }
 
     fun setParameters(parameters: Map<String, Parameter>): QueryParametersBuilder {

@@ -12,30 +12,30 @@ import javax.lang.model.element.ExecutableElement
 import javax.lang.model.element.VariableElement
 
 class ParametersBuilder(private val element: ExecutableElement, private val messager: Messager) {
-    private val parameters: List<Pair<VariableElement, Annotation>> = element.parameters.mapNotNull {
+    private val parameters: List<Pair<VariableElement, Annotation>> = element.parameters.mapNotNull { element ->
         val annotation = listOfNotNull(
-            it.getAnnotation(Param::class.java)?.let { it },
-            it.getAnnotation(Body::class.java)?.let { it },
-            it.getAnnotation(Query::class.java)?.let { it },
-            it.getAnnotation(QueryMap::class.java)?.let { it }
+            element.getAnnotation(Param::class.java),
+            element.getAnnotation(Body::class.java),
+            element.getAnnotation(Query::class.java),
+            element.getAnnotation(QueryMap::class.java)
         ).firstOrNull()
         if (annotation != null) {
-            it to annotation
+            element to annotation
         } else {
             null
         }
     }
 
     fun build(): Map<String, Parameter> {
-        //messager.printMessage(Diagnostic.Kind.WARNING, metadata.toString())
-        return parameters.associate {
+        // messager.printMessage(Diagnostic.Kind.WARNING, metadata.toString())
+        return parameters.associate { pair ->
             val builder = ParameterSpec.builder(
-                it.first.simpleName.toString(),
-                it.first.asType().asTypeName().javaToKotlinType()
+                pair.first.simpleName.toString(),
+                pair.first.asType().asTypeName().javaToKotlinType()
             )
-            it.first.simpleName.toString() to
+            pair.first.simpleName.toString() to
                     Parameter(
-                        it.second,
+                        pair.second,
                         builder.build()
                     )
         }
