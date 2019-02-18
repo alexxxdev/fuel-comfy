@@ -1,15 +1,8 @@
 package com.github.alexxxdev.fuellikeretrofit
 
 import com.github.alexxxdev.fuellikeretrofit.annotation.FuelInterface
-import com.github.alexxxdev.fuellikeretrofit.annotation.Get
-import com.github.alexxxdev.fuellikeretrofit.annotation.Param
-import com.github.alexxxdev.fuellikeretrofit.annotation.Post
 import com.github.alexxxdev.fuellikeretrofit.visitor.FuelInterfaceVisitor
-import javax.annotation.processing.AbstractProcessor
-import javax.annotation.processing.Filer
-import javax.annotation.processing.Messager
-import javax.annotation.processing.ProcessingEnvironment
-import javax.annotation.processing.RoundEnvironment
+import javax.annotation.processing.*
 import javax.lang.model.SourceVersion
 import javax.lang.model.element.ElementKind
 import javax.lang.model.element.TypeElement
@@ -34,12 +27,7 @@ class Processor : AbstractProcessor() {
     }
 
     override fun getSupportedAnnotationTypes(): MutableSet<String> {
-        return mutableSetOf(
-            FuelInterface::class.java.canonicalName,
-            Get::class.java.canonicalName,
-            Post::class.java.canonicalName,
-            Param::class.java.canonicalName
-        )
+        return mutableSetOf(FuelInterface::class.java.canonicalName)
     }
 
     override fun getSupportedSourceVersion(): SourceVersion {
