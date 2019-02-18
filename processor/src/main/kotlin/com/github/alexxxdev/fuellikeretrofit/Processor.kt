@@ -2,7 +2,11 @@ package com.github.alexxxdev.fuellikeretrofit
 
 import com.github.alexxxdev.fuellikeretrofit.annotation.FuelInterface
 import com.github.alexxxdev.fuellikeretrofit.visitor.FuelInterfaceVisitor
-import javax.annotation.processing.*
+import javax.annotation.processing.AbstractProcessor
+import javax.annotation.processing.Filer
+import javax.annotation.processing.Messager
+import javax.annotation.processing.ProcessingEnvironment
+import javax.annotation.processing.RoundEnvironment
 import javax.lang.model.SourceVersion
 import javax.lang.model.element.ElementKind
 import javax.lang.model.element.TypeElement
@@ -40,20 +44,21 @@ class Processor : AbstractProcessor() {
             return false
         }
         if (env?.processingOver() == false) {
-            env.getElementsAnnotatedWith(FuelInterface::class.java).mapNotNull { it as? TypeElement }.forEach { element ->
-                if (element.kind != ElementKind.INTERFACE) {
-                    messager.printMessage(
-                        Diagnostic.Kind.WARNING,
-                        "Only interfaces can be annotated with ${FuelInterface::class.simpleName}",
-                        element
-                    )
-                } else {
-                    val fuelInterfaceVisitor =
-                        FuelInterfaceVisitor(element, elementUtils, filer, messager, kaptKotlinGeneratedDir)
-                    visitors = visitors.plus(fuelInterfaceVisitor)
-                    element.accept(fuelInterfaceVisitor, null)
+            env.getElementsAnnotatedWith(FuelInterface::class.java).mapNotNull { it as? TypeElement }
+                .forEach { element ->
+                    if (element.kind != ElementKind.INTERFACE) {
+                        messager.printMessage(
+                            Diagnostic.Kind.WARNING,
+                            "Only interfaces can be annotated with ${FuelInterface::class.simpleName}",
+                            element
+                        )
+                    } else {
+                        val fuelInterfaceVisitor =
+                            FuelInterfaceVisitor(element, elementUtils, filer, messager, kaptKotlinGeneratedDir)
+                        visitors = visitors.plus(fuelInterfaceVisitor)
+                        element.accept(fuelInterfaceVisitor, null)
+                    }
                 }
-            }
             visitors.forEach { it.build() }
         }
         return true

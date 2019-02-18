@@ -18,9 +18,9 @@ class BodyBuilder {
     }
 
     fun build(body: (String, Array<Any>) -> Unit, import: (ClassName) -> Unit) {
-        parameters.filterValues { it.annotation is Body }.forEach {
-            val typeName = it.value.parameterSpec.type
-            val name = it.value.parameterSpec.name
+        parameters.filterValues { it.annotation is Body }.forEach { entry ->
+            val typeName = entry.value.parameterSpec.type
+            val name = entry.value.parameterSpec.name
             when {
                 typeName is ParameterizedTypeName -> when (typeName.rawType.javaToKotlinType()) {
                     List::class.asTypeName() -> buildForList(typeName, name, body, import)
@@ -29,7 +29,12 @@ class BodyBuilder {
                     ARRAY -> buildForArray(typeName, name, body, import)
                     else -> buildForParameterizedClass(typeName, name, body, import)
                 }
-                typeName.javaToKotlinType() == String::class.asTypeName() -> buildForString(typeName, name, body, import)
+                typeName.javaToKotlinType() == String::class.asTypeName() -> buildForString(
+                    typeName,
+                    name,
+                    body,
+                    import
+                )
                 typeName.javaClass.isPrimitive -> buildForPrimitive(typeName, name, body, import)
                 else -> buildForClass(typeName, name, body, import)
             }
@@ -37,15 +42,30 @@ class BodyBuilder {
         }
     }
 
-    private fun buildForClass(typeName: TypeName, name: String, body: (String, Array<Any>) -> Unit, import: (ClassName) -> Unit) {
+    private fun buildForClass(
+        typeName: TypeName,
+        name: String,
+        body: (String, Array<Any>) -> Unit,
+        import: (ClassName) -> Unit
+    ) {
         body("\t.body(%T.stringify(%T.serializer(), %N))", arrayOf(Json::class, typeName.javaToKotlinType(), name))
     }
 
-    private fun buildForPrimitive(typeName: TypeName, name: String, body: (String, Array<Any>) -> Unit, import: (ClassName) -> Unit) {
+    private fun buildForPrimitive(
+        typeName: TypeName,
+        name: String,
+        body: (String, Array<Any>) -> Unit,
+        import: (ClassName) -> Unit
+    ) {
         body("\t.body(%N.toString())", arrayOf(name))
     }
 
-    private fun buildForString(typeName: TypeName, name: String, body: (String, Array<Any>) -> Unit, import: (ClassName) -> Unit) {
+    private fun buildForString(
+        typeName: TypeName,
+        name: String,
+        body: (String, Array<Any>) -> Unit,
+        import: (ClassName) -> Unit
+    ) {
         body(
             "\t.body(%N)",
             arrayOf(name)
@@ -122,5 +142,4 @@ class BodyBuilder {
             arrayOf(Json::class, typeName.typeArguments[0].javaToKotlinType(), name)
         )
     }
-
 }
