@@ -30,10 +30,9 @@ contributors.fold({ list ->
 ```
 
 ## Features
-- [x] HTTP GET/POST requests
+- [x] HTTP GET/POST/PUT/DELETE/HEAD/PATCH requests
 - [x] Serialization/Deserialization using [fuel-kotlinx-serialization](https://github.com/kittinunf/fuel/tree/master/fuel-kotlinx-serialization)
 - [x] Support `suspend` function
-- [ ] HTTP PUT/DELETE/HEAD/PATCH requests
 - [ ] Serialization/Deserialization using [Gson](https://github.com/google/gson)
 - [ ] Maybe something else ...
 <br><br>
