@@ -44,13 +44,9 @@ contributors.fold({ list ->
 
 Defines the interface for fuel-comfy
 
-#### @Get
+#### @Get / @Post / @Put / @Delete / @Head / @Patch
 
-Defines the GET HttpMethod and UriTemplate for request. Expressions, values wrapped in curly-braces {expression} are resolved using their corresponding @Param annotated parameters.
-
-#### @Post
-
-Defines the POST HttpMethod and UriTemplate for request. Expressions, values wrapped in curly-braces {expression} are resolved using their corresponding @Param annotated parameters.
+Defines the GET/POST/PUT/DELETE/HEAD/PATCH HttpMethod and UriTemplate for request. Expressions, values wrapped in curly-braces {expression} are resolved using their corresponding @Param annotated parameters.
 
 #### @Param
 
