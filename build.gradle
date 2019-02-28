@@ -8,6 +8,9 @@ buildscript {
     ext.kotlinxMetadataVersion = '0.0.5'
     ext.kotlinpoetVersion = '1.0.1'
     ext.fuelVersion = '2.0.1'
+    ext.spekVersion = '2.0.0'
+    ext.okio = '2.2.2'
+    ext.mockwebserver = '3.13.1'
 
     repositories {
         maven { url "https://kotlin.bintray.com/kotlinx" }
@@ -54,7 +57,9 @@ detekt {
     //baseline = file("${project.rootDir}/detekt/baseline.xml")
     input = files(
             "${project.rootDir}/api/src/main/kotlin",
-            "${project.rootDir}/processor/src/main/kotlin"
+            "${project.rootDir}/processor/src/main/kotlin",
+            "${project.rootDir}/api/src/test/kotlin",
+            "${project.rootDir}/processor/test/main/kotlin"
     )
     filters = ".*/resources/.*,.*/build/.*"
     reports {

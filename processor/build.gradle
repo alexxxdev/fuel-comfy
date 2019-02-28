@@ -16,6 +16,23 @@ dependencies {
     implementation "com.github.kittinunf.fuel:fuel:$fuelVersion"
     implementation "com.github.kittinunf.fuel:fuel-kotlinx-serialization:$fuelVersion"
     implementation "com.squareup:kotlinpoet:$kotlinpoetVersion"
+
+    testImplementation ("org.spekframework.spek2:spek-dsl-jvm:$spekVersion")  {
+        exclude group: 'org.jetbrains.kotlin'
+    }
+    testRuntimeOnly ("org.spekframework.spek2:spek-runner-junit5:$spekVersion") {
+        //exclude group: 'org.junit.platform'
+        exclude group: 'org.jetbrains.kotlin'
+    }
+
+    testRuntimeOnly "org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion"
+    testImplementation "org.jetbrains.kotlin:kotlin-annotation-processing-embeddable:$kotlinVersion"
+    testImplementation "org.jetbrains.kotlin:kotlin-compiler-embeddable:$kotlinVersion"
+    testImplementation "org.jetbrains.kotlin:kotlin-test:$kotlinVersion"
+    testImplementation files('/usr/lib/jvm/java-8-oracle/lib/tools.jar')
+    testImplementation "org.jetbrains.kotlinx:kotlinx-serialization-runtime:$kotlinxSerializationVersion"
+    testImplementation "com.squareup.okhttp3:mockwebserver:$mockwebserver"
+    testImplementation "com.squareup.okio:okio:$okio"
 }
 
 sourceCompatibility = "7"
