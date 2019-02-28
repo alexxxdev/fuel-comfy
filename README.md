@@ -1,5 +1,6 @@
 # fuel-comfy 
 [![Kotlin](https://img.shields.io/badge/Kotlin-1.3.21-blue.svg)](https://kotlinlang.org)
+[![Fuel](https://img.shields.io/badge/Fuel-2.0.1-blue.svg)](https://github.com/kittinunf/fuel)
 [![](https://jitpack.io/v/alexxxdev/fuel-comfy.svg)](https://jitpack.io/#alexxxdev/fuel-comfy)
 ![](https://img.shields.io/github/license/alexxxdev/fuel-comfy.svg?style=flat)
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Falexxxdev%2Ffuel-comfy.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Falexxxdev%2Ffuel-comfy?ref=badge_shield)
@@ -44,13 +45,9 @@ contributors.fold({ list ->
 
 Defines the interface for fuel-comfy
 
-#### @Get
+#### @Get / @Post / @Put / @Delete / @Head / @Patch
 
-Defines the GET HttpMethod and UriTemplate for request. Expressions, values wrapped in curly-braces {expression} are resolved using their corresponding @Param annotated parameters.
-
-#### @Post
-
-Defines the POST HttpMethod and UriTemplate for request. Expressions, values wrapped in curly-braces {expression} are resolved using their corresponding @Param annotated parameters.
+Defines the GET/POST/PUT/DELETE/HEAD/PATCH HttpMethod and UriTemplate for request. Expressions, values wrapped in curly-braces {expression} are resolved using their corresponding @Param annotated parameters.
 
 #### @Param
 
