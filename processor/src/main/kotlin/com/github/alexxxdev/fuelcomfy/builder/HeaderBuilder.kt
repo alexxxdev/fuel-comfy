@@ -1,6 +1,6 @@
-package com.github.alexxxdev.fuellikeretrofit.builder
+package com.github.alexxxdev.fuelcomfy.builder
 
-import com.github.alexxxdev.fuellikeretrofit.annotation.Header
+import com.github.alexxxdev.fuelcomfy.annotation.Header
 import javax.annotation.processing.Messager
 import javax.lang.model.element.ExecutableElement
 

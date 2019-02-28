@@ -1,6 +1,6 @@
-package com.github.alexxxdev.fuellikeretrofit.builder
+package com.github.alexxxdev.fuelcomfy.builder
 
-import com.github.alexxxdev.fuellikeretrofit.javaToKotlinType
+import com.github.alexxxdev.fuelcomfy.javaToKotlinType
 import com.github.kittinunf.fuel.Fuel
 import com.github.kittinunf.fuel.core.Method
 import com.github.kittinunf.result.Result

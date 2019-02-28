@@ -1,6 +1,6 @@
-package com.github.alexxxdev.fuellikeretrofit.builder
+package com.github.alexxxdev.fuelcomfy.builder
 
-import com.github.alexxxdev.fuellikeretrofit.annotation.Param
+import com.github.alexxxdev.fuelcomfy.annotation.Param
 import com.github.kittinunf.fuel.core.Method
 
 class RequestPathBuilder {

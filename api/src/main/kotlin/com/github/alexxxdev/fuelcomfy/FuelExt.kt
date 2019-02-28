@@ -1,4 +1,4 @@
-package com.github.alexxxdev.fuellikeretrofit
+package com.github.alexxxdev.fuelcomfy
 
 import com.github.kittinunf.fuel.core.FuelManager
 import kotlin.reflect.KClass

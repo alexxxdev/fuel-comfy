@@ -1,7 +1,7 @@
-package com.github.alexxxdev.fuellikeretrofit.builder
+package com.github.alexxxdev.fuelcomfy.builder
 
-import com.github.alexxxdev.fuellikeretrofit.annotation.Query
-import com.github.alexxxdev.fuellikeretrofit.annotation.QueryMap
+import com.github.alexxxdev.fuelcomfy.annotation.Query
+import com.github.alexxxdev.fuelcomfy.annotation.QueryMap
 
 class QueryParametersBuilder {
     private var parameters: Map<String, Parameter> = emptyMap()

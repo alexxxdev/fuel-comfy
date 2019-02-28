@@ -1,10 +1,10 @@
-package com.github.alexxxdev.fuellikeretrofit.builder
+package com.github.alexxxdev.fuelcomfy.builder
 
-import com.github.alexxxdev.fuellikeretrofit.annotation.Body
-import com.github.alexxxdev.fuellikeretrofit.annotation.Param
-import com.github.alexxxdev.fuellikeretrofit.annotation.Query
-import com.github.alexxxdev.fuellikeretrofit.annotation.QueryMap
-import com.github.alexxxdev.fuellikeretrofit.javaToKotlinType
+import com.github.alexxxdev.fuelcomfy.annotation.Body
+import com.github.alexxxdev.fuelcomfy.annotation.Param
+import com.github.alexxxdev.fuelcomfy.annotation.Query
+import com.github.alexxxdev.fuelcomfy.annotation.QueryMap
+import com.github.alexxxdev.fuelcomfy.javaToKotlinType
 import com.squareup.kotlinpoet.ParameterSpec
 import com.squareup.kotlinpoet.asTypeName
 import javax.annotation.processing.Messager

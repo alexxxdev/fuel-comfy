@@ -1,7 +1,7 @@
-package com.github.alexxxdev.fuellikeretrofit
+package com.github.alexxxdev.fuelcomfy
 
-import com.github.alexxxdev.fuellikeretrofit.annotation.FuelInterface
-import com.github.alexxxdev.fuellikeretrofit.visitor.FuelInterfaceVisitor
+import com.github.alexxxdev.fuelcomfy.annotation.FuelInterface
+import com.github.alexxxdev.fuelcomfy.visitor.FuelInterfaceVisitor
 import javax.annotation.processing.AbstractProcessor
 import javax.annotation.processing.Filer
 import javax.annotation.processing.Messager

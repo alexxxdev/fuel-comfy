@@ -1,7 +1,7 @@
-package com.github.alexxxdev.fuellikeretrofit.visitor
+package com.github.alexxxdev.fuelcomfy.visitor
 
-import com.github.alexxxdev.fuellikeretrofit.builder.FunSpecBuilder
-import com.github.alexxxdev.fuellikeretrofit.builder.InitBuilder
+import com.github.alexxxdev.fuelcomfy.builder.FunSpecBuilder
+import com.github.alexxxdev.fuelcomfy.builder.InitBuilder
 import com.squareup.kotlinpoet.ClassName
 import com.squareup.kotlinpoet.FileSpec
 import com.squareup.kotlinpoet.TypeSpec

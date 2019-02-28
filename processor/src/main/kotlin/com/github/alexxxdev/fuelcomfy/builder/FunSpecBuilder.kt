@@ -1,11 +1,11 @@
-package com.github.alexxxdev.fuellikeretrofit.builder
+package com.github.alexxxdev.fuelcomfy.builder
 
-import com.github.alexxxdev.fuellikeretrofit.annotation.Delete
-import com.github.alexxxdev.fuellikeretrofit.annotation.Get
-import com.github.alexxxdev.fuellikeretrofit.annotation.Head
-import com.github.alexxxdev.fuellikeretrofit.annotation.Patch
-import com.github.alexxxdev.fuellikeretrofit.annotation.Post
-import com.github.alexxxdev.fuellikeretrofit.annotation.Put
+import com.github.alexxxdev.fuelcomfy.annotation.Delete
+import com.github.alexxxdev.fuelcomfy.annotation.Get
+import com.github.alexxxdev.fuelcomfy.annotation.Head
+import com.github.alexxxdev.fuelcomfy.annotation.Patch
+import com.github.alexxxdev.fuelcomfy.annotation.Post
+import com.github.alexxxdev.fuelcomfy.annotation.Put
 import com.github.kittinunf.fuel.core.Method
 import com.squareup.kotlinpoet.ClassName
 import com.squareup.kotlinpoet.FunSpec
