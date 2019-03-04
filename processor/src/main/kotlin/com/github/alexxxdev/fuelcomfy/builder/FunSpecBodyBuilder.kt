@@ -38,9 +38,11 @@ class FunSpecBodyBuilder(private val element: ExecutableElement, private val mes
                 )
             )
 
-            headerBuilder.build { body, params ->
-                statement(body, params)
-            }
+            headerBuilder
+                .setParameters(parameters)
+                .build { body, params ->
+                    statement(body, params)
+                }
 
             bodyBuilder.setParameters(parameters)
                 .build({ body, params ->
