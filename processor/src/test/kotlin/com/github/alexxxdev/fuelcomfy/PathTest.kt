@@ -3,6 +3,10 @@ package com.github.alexxxdev.fuelcomfy
 import com.github.alexxxdev.fuelcomfy.common.BaseTest
 import com.github.alexxxdev.fuelcomfy.sources.GitHubService
 import com.github.kittinunf.fuel.core.FuelManager
+import com.github.kittinunf.fuel.core.Method
+import okhttp3.mockwebserver.MockResponse
+import okhttp3.mockwebserver.MockWebServer
+import okhttp3.mockwebserver.RecordedRequest
 import org.jetbrains.kotlin.cli.common.ExitCode
 import kotlin.test.assertEquals
 import kotlin.test.assertNotNull
@@ -21,7 +25,7 @@ object PathTest : BaseTest({
         test("Compile success") { assertTrue(resultCompile) }
         test("Load success") { assertNotNull(kclass) }
     }
-    /*group("GET Request with params headers") {
+    group("GET Request with params headers") {
         var request: RecordedRequest? = null
         val server = MockWebServer()
 
@@ -41,7 +45,7 @@ object PathTest : BaseTest({
         afterGroup {
             server.shutdown()
         }
-    }*/
+    }
 })
 
 
