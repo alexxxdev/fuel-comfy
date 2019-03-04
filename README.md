@@ -4,6 +4,9 @@
 [![](https://jitpack.io/v/alexxxdev/fuel-comfy.svg)](https://jitpack.io/#alexxxdev/fuel-comfy)
 ![](https://img.shields.io/github/license/alexxxdev/fuel-comfy.svg?style=flat)
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Falexxxdev%2Ffuel-comfy.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Falexxxdev%2Ffuel-comfy?ref=badge_shield)
+[![Build Status](https://travis-ci.org/alexxxdev/fuel-comfy.svg?branch=master)](https://travis-ci.org/alexxxdev/fuel-comfy)
+[![codecov](https://codecov.io/gh/alexxxdev/fuel-comfy/branch/master/graph/badge.svg)](https://codecov.io/gh/alexxxdev/fuel-comfy)
+
 
 More comfortable use of [Fuel](https://github.com/kittinunf/fuel) as in [Retrofit](https://square.github.io/retrofit/) or [Feign](https://github.com/OpenFeign/feign) for Kotlin/Android
 
@@ -34,7 +37,7 @@ contributors.fold({ list ->
 ## Features
 - [x] HTTP GET/POST/PUT/DELETE/HEAD/PATCH requests
 - [x] Serialization/Deserialization using [fuel-kotlinx-serialization](https://github.com/kittinunf/fuel/tree/master/fuel-kotlinx-serialization)
-- [x] Support `suspend` function
+- [ ] Support `suspend` function
 - [ ] Serialization/Deserialization using [Gson](https://github.com/google/gson)
 - [ ] Maybe something else ...
 <br><br>

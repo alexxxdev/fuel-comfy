@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>detekt report</title>
+    <style>
+h2 {
+  background-color: #666666;
+  padding: 0.2em;
+  color: #ffffff;
+}
+h3 {
+  background-color:#f8dfdf;
+  padding:0.5em;
+}
+.rule {
+  background-color: #dddddd;
+  padding: 0.3em;
+  font-weight: bold;
+}
+.description {
+  color:#000000;
+  padding:0.3em;
+}
+.location {
+  color: #690505;
+  font-family: monospace;
+}
+.message {
+  font-size: 0.8em;
+  color: #444444;
+}
+.rule-container {
+  border: 0.1em dashed #dddddd;
+  padding: 0.1em;
+  line-height: 1.5em;
+}
+</style>
+</head>
+<body>
+
+<h1>detekt report</h1>
+
+<h2>Metrics</h2>
+
+<ul>
+<li>
+number of kt files: 25
+</li>
+<li>
+number of packages: 4
+</li>
+<li>
+number of classes: 27
+</li>
+<li>
+number of functions: 42
+</li>
+<li>
+number of properties: 72
+</li>
+</ul>
+
+<h2>Findings</h2>
+<h3>complexity</h3>
+<div class="rule-container">
+<span class="rule">
+NestedBlockDepth
+</span>
+<span class="description">
+Excessive nesting leads to hidden complexity. Prefer extracting code to make it easier to understand.
+</span>
+</div>
+<ul>
+<li>
+<span class="location">
+/home/alexxxdev/Android/projects/fuel-comfy/processor/src/main/kotlin/com/github/alexxxdev/fuelcomfy/builder/HeaderBuilder.kt:16:5
+</span>
+<br />
+<span class="message">
+Function build is nested too deeply.
+</span>
+</li>
+</ul>
+<div class="rule-container">
+<span class="rule">
+ComplexMethod
+</span>
+<span class="description">
+Prefer splitting up complex methods into smaller, easier to understand methods.
+</span>
+</div>
+<ul>
+<li>
+<span class="location">
+/home/alexxxdev/Android/projects/fuel-comfy/processor/src/main/kotlin/com/github/alexxxdev/fuelcomfy/builder/FunSpecBodyBuilder.kt:58:5
+</span>
+<br />
+<span class="message">
+The function buildReturn appears to be too complex.
+</span>
+</li>
+<li>
+<span class="location">
+/home/alexxxdev/Android/projects/fuel-comfy/processor/src/main/kotlin/com/github/alexxxdev/fuelcomfy/builder/BodyBuilder.kt:20:5
+</span>
+<br />
+<span class="message">
+The function build appears to be too complex.
+</span>
+</li>
+</ul>
+<h3>performance</h3>
+<div class="rule-container">
+<span class="rule">
+SpreadOperator
+</span>
+<span class="description">
+Using a spread operator causes a full copy of the array to be created before calling a method has a very high performance penalty.
+</span>
+</div>
+<ul>
+<li>
+<span class="location">
+/home/alexxxdev/Android/projects/fuel-comfy/processor/src/main/kotlin/com/github/alexxxdev/fuelcomfy/PoetExt.kt:13:62
+</span>
+<br />
+<span class="message">
+Using a spread operator causes a full copy of the array to be created before calling a method has a very high performance penalty.
+</span>
+</li>
+<li>
+<span class="location">
+/home/alexxxdev/Android/projects/fuel-comfy/processor/src/main/kotlin/com/github/alexxxdev/fuelcomfy/builder/FunSpecBuilder.kt:52:34
+</span>
+<br />
+<span class="message">
+Using a spread operator causes a full copy of the array to be created before calling a method has a very high performance penalty.
+</span>
+</li>
+</ul>
+
+</body>
+</html>
