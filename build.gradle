@@ -38,6 +38,8 @@ plugins {
 apply plugin: 'io.gitlab.arturbosch.detekt'
 
 allprojects {
+    apply plugin: 'jacoco'
+
     repositories {
         google()
         jcenter()
@@ -45,6 +47,11 @@ allprojects {
         maven { url "https://jitpack.io" }
         maven { url "https://plugins.gradle.org/m2/" }
     }
+}
+
+jacoco {
+    toolVersion = "0.8.3"
+    reportsDir = file("$buildDir/reports")
 }
 
 task clean(type: Delete) {
