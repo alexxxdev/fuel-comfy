@@ -18,7 +18,7 @@ import java.util.zip.ZipOutputStream
 import kotlin.reflect.KClass
 
 internal class KotlinCompilerCall(var scratchDir: File) {
-    val sourcesDir = File(scratchDir, "src/test/kotlin/com/github/alexxxdev/fuellikeretrofit/sources")
+    val sourcesDir = File(scratchDir, "src/test/kotlin/com/github/alexxxdev/fuelcomfy/sources")
     val classesDir = File(scratchDir, "build/classes")
     val servicesJar = File(scratchDir, "build/services.jar")
 

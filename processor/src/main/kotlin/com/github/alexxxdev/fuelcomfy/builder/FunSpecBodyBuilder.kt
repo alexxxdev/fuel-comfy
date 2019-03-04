@@ -15,7 +15,7 @@ import javax.tools.Diagnostic
 
 class FunSpecBodyBuilder(private val element: ExecutableElement, private val messager: Messager) {
     private val queryParametersBuilder = QueryParametersBuilder()
-    private val requestPathBuilder = RequestPathBuilder()
+    private val requestPathBuilder = RequestPathBuilder(element, messager)
     private val bodyBuilder = BodyBuilder()
     private val headerBuilder = HeaderBuilder(element, messager)
     var parameters: Map<String, Parameter> = emptyMap()

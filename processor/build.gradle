@@ -9,7 +9,7 @@ sourceSets {
 dependencies {
     implementation project(':api')
 
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
     implementation "org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion"
     implementation "org.jetbrains.kotlinx:kotlinx-serialization-runtime:$kotlinxSerializationVersion"
     implementation "org.jetbrains.kotlinx:kotlinx-metadata-jvm:$kotlinxMetadataVersion"
@@ -33,6 +33,12 @@ dependencies {
     testImplementation "org.jetbrains.kotlinx:kotlinx-serialization-runtime:$kotlinxSerializationVersion"
     testImplementation "com.squareup.okhttp3:mockwebserver:$mockwebserver"
     testImplementation "com.squareup.okio:okio:$okio"
+}
+
+test {
+    useJUnitPlatform {
+        includeEngines 'spek2'
+    }
 }
 
 sourceCompatibility = "7"
