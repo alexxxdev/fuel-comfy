@@ -62,15 +62,19 @@ class FunSpecBodyBuilder(private val element: ExecutableElement, private val mes
         if (returnType is ParameterizedTypeName) {
             when ((returnType as ParameterizedTypeName).typeArguments[0]) {
                 is ClassName -> {
-                    statement(
-                        "\t.responseObject(%T<%T>(%T.serializer()))",
-                        arrayOf(
-                            ClassName("com.github.kittinunf.fuel.serialization", "kotlinxDeserializerOf"),
-                            // todo only List<T>
-                            (returnType as ParameterizedTypeName).typeArguments[0],
-                            (returnType as ParameterizedTypeName).typeArguments[0]
+                    if (((returnType as ParameterizedTypeName).typeArguments[0] as ClassName).canonicalName == Any::class.qualifiedName) {
+                        statement("\t.response()", arrayOf())
+                    } else {
+                        statement(
+                            "\t.responseObject(%T<%T>(%T.serializer()))",
+                            arrayOf(
+                                ClassName("com.github.kittinunf.fuel.serialization", "kotlinxDeserializerOf"),
+                                // todo only List<T>
+                                (returnType as ParameterizedTypeName).typeArguments[0],
+                                (returnType as ParameterizedTypeName).typeArguments[0]
+                            )
                         )
-                    )
+                    }
                 }
                 is ParameterizedTypeName -> {
                     when (((returnType as ParameterizedTypeName).typeArguments[0] as ParameterizedTypeName).rawType.javaToKotlinType()) {
