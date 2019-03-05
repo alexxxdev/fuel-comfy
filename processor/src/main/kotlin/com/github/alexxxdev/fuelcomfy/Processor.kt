@@ -39,6 +39,7 @@ class Processor : AbstractProcessor() {
     }
 
     override fun process(annotations: MutableSet<out TypeElement>?, env: RoundEnvironment?): Boolean {
+        visitors = emptySet()
         if (kaptKotlinGeneratedDir.isEmpty()) {
             messager.printMessage(Diagnostic.Kind.ERROR, "Can't find the target directory for generated Kotlin files.")
             return false
