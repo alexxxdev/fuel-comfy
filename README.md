@@ -8,7 +8,6 @@
 [![codecov](https://codecov.io/gh/alexxxdev/fuel-comfy/branch/master/graph/badge.svg)](https://codecov.io/gh/alexxxdev/fuel-comfy)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/f3522966b0364e579c71fbed7b04b36a)](https://www.codacy.com/app/alexxxdev/fuel-comfy?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=alexxxdev/fuel-comfy&amp;utm_campaign=Badge_Grade)
 
-
 More comfortable use of [Fuel](https://github.com/kittinunf/fuel) as in [Retrofit](https://square.github.io/retrofit/) or [Feign](https://github.com/OpenFeign/feign) for Kotlin/Android
 
 ## Basics
@@ -36,12 +35,12 @@ contributors.fold({ list ->
 ```
 
 ## Features
+
 - [x] HTTP GET/POST/PUT/DELETE/HEAD/PATCH requests
 - [x] Serialization/Deserialization using [fuel-kotlinx-serialization](https://github.com/kittinunf/fuel/tree/master/fuel-kotlinx-serialization)
 - [ ] Support `suspend` function
 - [ ] Serialization/Deserialization using [Gson](https://github.com/google/gson)
 - [ ] Maybe something else ...
-<br><br>
 
 ### Interface Annotations
 
@@ -98,7 +97,7 @@ interface GitHubService {
 }
 ```
 
-####  @Body	
+#### @Body	
 
 Defines a request body
 
@@ -129,7 +128,6 @@ dependencies {
     kapt 'com.github.alexxxdev.fuel-comfy:processor:-SNAPSHOT'
 }
 ```
-
 
 ## License
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Falexxxdev%2Ffuel-comfy.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Falexxxdev%2Ffuel-comfy?ref=badge_large)
