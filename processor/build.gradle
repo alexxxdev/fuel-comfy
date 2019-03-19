@@ -1,4 +1,5 @@
 apply plugin: 'kotlin'
+apply plugin: 'kotlinx-serialization'
 apply plugin: "com.github.ben-manes.versions"
 apply plugin: 'maven'
 
@@ -8,22 +9,29 @@ sourceSets {
 
 dependencies {
     implementation project(':api')
+    compileOnly project(':processor-coroutines')
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
     implementation "org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion"
     implementation "org.jetbrains.kotlinx:kotlinx-serialization-runtime:$kotlinxSerializationVersion"
-    implementation "org.jetbrains.kotlinx:kotlinx-metadata-jvm:$kotlinxMetadataVersion"
     implementation "com.github.kittinunf.fuel:fuel:$fuelVersion"
     implementation "com.github.kittinunf.fuel:fuel-kotlinx-serialization:$fuelVersion"
     implementation "com.squareup:kotlinpoet:$kotlinpoetVersion"
 
-    testImplementation ("org.spekframework.spek2:spek-dsl-jvm:$spekVersion")  {
+    testImplementation("org.spekframework.spek2:spek-dsl-jvm:$spekVersion") {
         exclude group: 'org.jetbrains.kotlin'
     }
-    testRuntimeOnly ("org.spekframework.spek2:spek-runner-junit5:$spekVersion") {
+    testRuntimeOnly("org.spekframework.spek2:spek-runner-junit5:$spekVersion") {
         //exclude group: 'org.junit.platform'
         exclude group: 'org.jetbrains.kotlin'
     }
+
+    testImplementation project(':processor-coroutines')
+
+    testImplementation "com.github.kittinunf.fuel:fuel:$fuelVersion"
+    testImplementation "com.github.kittinunf.fuel:fuel-kotlinx-serialization:$fuelVersion"
+    testImplementation "com.github.kittinunf.fuel:fuel-coroutines:$fuelVersion"
+    testImplementation "org.jetbrains.kotlinx:kotlinx-serialization-runtime:$kotlinxSerializationVersion"
 
     testRuntimeOnly "org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion"
     testImplementation "org.jetbrains.kotlin:kotlin-annotation-processing-embeddable:$kotlinVersion"
@@ -51,11 +59,13 @@ test {
         group = "Reporting"
         description = "Generate Jacoco coverage report."
         classDirectories = fileTree(
-                dir: "$buildDir/classes/kotlin/main"
+                dir: "$buildDir/classes/kotlin/main",
         )
         def coverageSourceDirs = [
-                "src/main/kotlin"
+                "src/main/kotlin",
+                "../processor-coroutines/src/main/kotlin"
         ]
+        additionalClassDirs = files(["../processor-coroutines/build/classes/kotlin/main"])
         additionalSourceDirs = files(coverageSourceDirs)
         sourceDirectories = files(coverageSourceDirs)
         executionData = files("$buildDir/jacoco/junitPlatformTest.exec")
