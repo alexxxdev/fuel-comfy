@@ -1,1 +1,1 @@
-include ':api', ':processor'
+include ':api', ':processor', ':processor-coroutines'

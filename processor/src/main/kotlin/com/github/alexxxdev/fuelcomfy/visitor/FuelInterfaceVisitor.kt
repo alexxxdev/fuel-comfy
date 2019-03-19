@@ -63,21 +63,3 @@ class FuelInterfaceVisitor(
         }
     }
 }
-
-data class Func(val signature: String) {
-    var field: List<Field> = emptyList()
-    var suspended: Boolean = false
-
-    override fun toString(): String {
-        return "Func(signature='$signature', field=$field, suspended=$suspended)"
-    }
-}
-
-data class Field(var name: String) {
-    var nullable: Boolean = false
-    var defaultValue: Boolean = false
-
-    override fun toString(): String {
-        return "Field(name='$name', nullable=$nullable, defaultValue=$defaultValue)"
-    }
-}

@@ -8,11 +8,11 @@ sourceSets {
 
 dependencies {
     implementation project(':api')
+    compileOnly project(':processor-coroutines')
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
     implementation "org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion"
     implementation "org.jetbrains.kotlinx:kotlinx-serialization-runtime:$kotlinxSerializationVersion"
-    implementation "org.jetbrains.kotlinx:kotlinx-metadata-jvm:$kotlinxMetadataVersion"
     implementation "com.github.kittinunf.fuel:fuel:$fuelVersion"
     implementation "com.github.kittinunf.fuel:fuel-kotlinx-serialization:$fuelVersion"
     implementation "com.squareup:kotlinpoet:$kotlinpoetVersion"

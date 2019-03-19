@@ -36,16 +36,29 @@ class FunSpecBuilder(private val element: ExecutableElement, private val message
             return null
         }
 
-        val parameters: Map<String, Parameter> = parametersBuilder.build().apply {
+        var maybeReturnTypeNameForSuspendFunction: TypeName? = null
+        var suspended = false
+        val parameters: Map<String, Parameter> = parametersBuilder.build {
+            suspended = true
+            maybeReturnTypeNameForSuspendFunction = it
+        }.apply {
             forEach { func.addParameter(it.value.parameterSpec) }
         }
-        val returnType: TypeName? = returnTypeNameBuilder.build()?.apply {
-            func.returns(this)
+
+        val returnType: TypeName? = if (maybeReturnTypeNameForSuspendFunction != null) {
+            func.addModifiers(KModifier.SUSPEND)
+            func.returns(maybeReturnTypeNameForSuspendFunction!!)
+            maybeReturnTypeNameForSuspendFunction
+        } else {
+            returnTypeNameBuilder.build()?.apply {
+                func.returns(this)
+            }
         }
 
         bodyBuilder.apply {
             this.method = httpMethod
             this.parameters = parameters
+            this.suspended = suspended
             returnType?.let { this.returnType = it }
 
             build({ str, params ->
