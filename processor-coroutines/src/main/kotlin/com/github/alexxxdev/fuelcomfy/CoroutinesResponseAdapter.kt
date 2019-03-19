@@ -1,13 +1,12 @@
-package com.github.alexxxdev.fuellikeretrofit
+package com.github.alexxxdev.fuelcomfy
 
-import com.github.alexxxdev.fuelcomfy.BaseResponseAdapter
-import com.github.alexxxdev.fuelcomfy.javaToKotlinType
 import com.squareup.kotlinpoet.ClassName
 import com.squareup.kotlinpoet.ParameterizedTypeName
 import com.squareup.kotlinpoet.TypeName
 
 class CoroutinesResponseAdapter : BaseResponseAdapter {
     private val awaitStringResponseResultClassName = ClassName("com.github.kittinunf.fuel.coroutines", "awaitStringResponseResult")
+    private val awaitObjectResponseResultClassName = ClassName("com.github.kittinunf.fuel.coroutines", "awaitObjectResponseResult")
     private val kotlinxDeserializerOfClassName = ClassName("com.github.kittinunf.fuel.serialization", "kotlinxDeserializerOf")
     private val listClassName = ClassName("kotlinx.serialization", "list")
     private val setClassName = ClassName("kotlinx.serialization", "set")
@@ -26,7 +25,7 @@ class CoroutinesResponseAdapter : BaseResponseAdapter {
         statement(
             "\t.%T(%T<%T>(%T.serializer()))",
             arrayOf(
-                awaitStringResponseResultClassName,
+                awaitObjectResponseResultClassName,
                 kotlinxDeserializerOfClassName,
                 returnType.typeArguments[0],
                 returnType.typeArguments[0]
@@ -37,13 +36,14 @@ class CoroutinesResponseAdapter : BaseResponseAdapter {
     override fun writeList(returnType: TypeName, statement: (String, Array<Any>) -> Unit, import: (ClassName) -> Unit) {
         returnType as ParameterizedTypeName
         import(listClassName)
+        val parameterizedType = returnType.typeArguments[0] as ParameterizedTypeName
         statement(
             "\t.%T(%T<%T>(%T.serializer().list))",
             arrayOf(
-                awaitStringResponseResultClassName,
+                awaitObjectResponseResultClassName,
                 kotlinxDeserializerOfClassName,
                 returnType.typeArguments[0],
-                (returnType.typeArguments[0] as ParameterizedTypeName).typeArguments[0]
+                parameterizedType.typeArguments[0]
             )
         )
     }
@@ -51,13 +51,14 @@ class CoroutinesResponseAdapter : BaseResponseAdapter {
     override fun writeSet(returnType: TypeName, statement: (String, Array<Any>) -> Unit, import: (ClassName) -> Unit) {
         returnType as ParameterizedTypeName
         import(setClassName)
+        val parameterizedType = returnType.typeArguments[0] as ParameterizedTypeName
         statement(
             "\t.%T(%T<%T>(%T.serializer().set))",
             arrayOf(
-                awaitStringResponseResultClassName,
+                awaitObjectResponseResultClassName,
                 kotlinxDeserializerOfClassName,
                 returnType.typeArguments[0],
-                (returnType.typeArguments[0] as ParameterizedTypeName).typeArguments[0]
+                parameterizedType.typeArguments[0]
             )
         )
     }
@@ -66,28 +67,30 @@ class CoroutinesResponseAdapter : BaseResponseAdapter {
         returnType as ParameterizedTypeName
         import(mapClassName)
         import(serializerClassName)
+        val parameterizedType = returnType.typeArguments[0] as ParameterizedTypeName
         statement(
             "\t.%T(%T<%T>((%T.serializer() to %T.serializer()).map))",
             arrayOf(
-                awaitStringResponseResultClassName,
+                awaitObjectResponseResultClassName,
                 kotlinxDeserializerOfClassName,
                 returnType.typeArguments[0],
-                (returnType.typeArguments[0] as ParameterizedTypeName).typeArguments[0],
-                (returnType.typeArguments[0] as ParameterizedTypeName).typeArguments[1]
+                parameterizedType.typeArguments[0],
+                parameterizedType.typeArguments[1]
             )
         )
     }
 
     override fun writeParameterizedClass(returnType: TypeName, statement: (String, Array<Any>) -> Unit) {
         returnType as ParameterizedTypeName
+        val parameterizedType = returnType.typeArguments[0] as ParameterizedTypeName
         statement(
             "\t.%T(%T<%T>(%T.serializer(%T.serializer())))",
             arrayOf(
-                awaitStringResponseResultClassName,
+                awaitObjectResponseResultClassName,
                 kotlinxDeserializerOfClassName,
                 returnType.typeArguments[0],
-                (returnType.typeArguments[0] as ParameterizedTypeName).rawType.javaToKotlinType(),
-                (returnType.typeArguments[0] as ParameterizedTypeName).typeArguments[0]
+                parameterizedType.rawType.javaToKotlinType(),
+                parameterizedType.typeArguments[0]
             )
         )
     }
@@ -95,14 +98,15 @@ class CoroutinesResponseAdapter : BaseResponseAdapter {
     override fun writeParameterizedList(returnType: TypeName, statement: (String, Array<Any>) -> Unit, import: (ClassName) -> Unit) {
         returnType as ParameterizedTypeName
         import(listClassName)
+        val parameterizedType = returnType.typeArguments[0] as ParameterizedTypeName
         statement(
             "\t.%T(%T<%T>(%T.serializer(%T.serializer().list)))",
             arrayOf(
-                awaitStringResponseResultClassName,
+                awaitObjectResponseResultClassName,
                 kotlinxDeserializerOfClassName,
                 returnType.typeArguments[0],
-                (returnType.typeArguments[0] as ParameterizedTypeName).rawType.javaToKotlinType(),
-                ((returnType.typeArguments[0] as ParameterizedTypeName).typeArguments[0] as ParameterizedTypeName).typeArguments[0].javaToKotlinType()
+                parameterizedType.rawType.javaToKotlinType(),
+                (parameterizedType.typeArguments[0] as ParameterizedTypeName).typeArguments[0].javaToKotlinType()
             )
         )
     }
@@ -110,14 +114,15 @@ class CoroutinesResponseAdapter : BaseResponseAdapter {
     override fun writeParameterizedSet(returnType: TypeName, statement: (String, Array<Any>) -> Unit, import: (ClassName) -> Unit) {
         returnType as ParameterizedTypeName
         import(setClassName)
+        val parameterizedType = returnType.typeArguments[0] as ParameterizedTypeName
         statement(
             "\t.%T(%T<%T>(%T.serializer(%T.serializer().set)))",
             arrayOf(
-                awaitStringResponseResultClassName,
+                awaitObjectResponseResultClassName,
                 kotlinxDeserializerOfClassName,
                 returnType.typeArguments[0],
-                (returnType.typeArguments[0] as ParameterizedTypeName).rawType.javaToKotlinType(),
-                ((returnType.typeArguments[0] as ParameterizedTypeName).typeArguments[0] as ParameterizedTypeName).typeArguments[0].javaToKotlinType()
+                parameterizedType.rawType.javaToKotlinType(),
+                (parameterizedType.typeArguments[0] as ParameterizedTypeName).typeArguments[0].javaToKotlinType()
             )
         )
     }
@@ -126,17 +131,17 @@ class CoroutinesResponseAdapter : BaseResponseAdapter {
         returnType as ParameterizedTypeName
         import(mapClassName)
         import(serializerClassName)
+        val parameterizedType = returnType.typeArguments[0] as ParameterizedTypeName
         statement(
             "\t.%T(%T<%T>(%T.serializer((%T.serializer() to %T.serializer()).map)))",
             arrayOf(
-                awaitStringResponseResultClassName,
+                awaitObjectResponseResultClassName,
                 kotlinxDeserializerOfClassName,
                 returnType.typeArguments[0],
-                (returnType.typeArguments[0] as ParameterizedTypeName).rawType.javaToKotlinType(),
-                ((returnType.typeArguments[0] as ParameterizedTypeName).typeArguments[0] as ParameterizedTypeName).typeArguments[0].javaToKotlinType(),
-                ((returnType.typeArguments[0] as ParameterizedTypeName).typeArguments[0] as ParameterizedTypeName).typeArguments[1].javaToKotlinType()
+                parameterizedType.rawType.javaToKotlinType(),
+                (parameterizedType.typeArguments[0] as ParameterizedTypeName).typeArguments[0].javaToKotlinType(),
+                (parameterizedType.typeArguments[0] as ParameterizedTypeName).typeArguments[1].javaToKotlinType()
             )
         )
     }
-
 }

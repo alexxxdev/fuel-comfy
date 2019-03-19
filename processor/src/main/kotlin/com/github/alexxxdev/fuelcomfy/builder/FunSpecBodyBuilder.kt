@@ -1,9 +1,9 @@
 package com.github.alexxxdev.fuelcomfy.builder
 
 import com.github.alexxxdev.fuelcomfy.BaseResponseAdapter
+import com.github.alexxxdev.fuelcomfy.CoroutinesResponseAdapter
 import com.github.alexxxdev.fuelcomfy.FuelResponseAdapter
 import com.github.alexxxdev.fuelcomfy.javaToKotlinType
-import com.github.alexxxdev.fuellikeretrofit.CoroutinesResponseAdapter
 import com.github.kittinunf.fuel.Fuel
 import com.github.kittinunf.fuel.core.Method
 import com.github.kittinunf.result.Result
@@ -67,7 +67,7 @@ class FunSpecBodyBuilder(private val element: ExecutableElement, private val mes
         if (returnType is ParameterizedTypeName) {
             when ((returnType as ParameterizedTypeName).typeArguments[0]) {
                 is ClassName -> {
-                    if (((returnType as ParameterizedTypeName).typeArguments[0] as ClassName).canonicalName == Any::class.qualifiedName) {
+                    if (((returnType as ParameterizedTypeName).typeArguments[0] as ClassName).simpleName == Any::class.simpleName) {
                         responseAdapter.writeAnyClass(statement)
                     } else {
                         responseAdapter.writeClass(returnType, statement)
@@ -92,20 +92,24 @@ class FunSpecBodyBuilder(private val element: ExecutableElement, private val mes
     private fun notSupport() {
         messager.printMessage(
             Diagnostic.Kind.ERROR,
-            "return type only " + Result::class.java.canonicalName + "<V,E> V:" + ((returnType as ParameterizedTypeName).typeArguments[0] as ParameterizedTypeName).rawType.canonicalName + " - only List, Set, Map, CustomClass",
+            "return type only " + Result::class.java.canonicalName + "<V,E> V:" +
+                    returnType.javaToKotlinType() +
+                    " - only List, Set, Map, CustomClass",
             element
         )
     }
 
     private fun buildForParameterizedClass(statement: (String, Array<Any>) -> Unit, import: (ClassName) -> Unit) {
-        if (((returnType as ParameterizedTypeName).typeArguments[0] as ParameterizedTypeName).typeArguments[0] is ClassName) {
-            responseAdapter.writeParameterizedClass(returnType, statement)
-        } else if (((returnType as ParameterizedTypeName).typeArguments[0] as ParameterizedTypeName).typeArguments[0] is ParameterizedTypeName) {
-            when ((((returnType as ParameterizedTypeName).typeArguments[0] as ParameterizedTypeName).typeArguments[0] as ParameterizedTypeName).rawType.javaToKotlinType()) {
-                List::class.asTypeName() -> responseAdapter.writeParameterizedList(returnType, statement, import)
-                Set::class.asTypeName() -> responseAdapter.writeParameterizedSet(returnType, statement, import)
-                Map::class.asTypeName() -> responseAdapter.writeParameterizedMap(returnType, statement, import)
-                else -> notSupport()
+        (returnType as? ParameterizedTypeName)?.let { returnType ->
+            if ((returnType.typeArguments[0] as ParameterizedTypeName).typeArguments[0] is ClassName) {
+                responseAdapter.writeParameterizedClass(returnType, statement)
+            } else if ((returnType.typeArguments[0] as ParameterizedTypeName).typeArguments[0] is ParameterizedTypeName) {
+                when (((returnType.typeArguments[0] as ParameterizedTypeName).typeArguments[0] as ParameterizedTypeName).rawType.javaToKotlinType()) {
+                    List::class.asTypeName() -> responseAdapter.writeParameterizedList(returnType, statement, import)
+                    Set::class.asTypeName() -> responseAdapter.writeParameterizedSet(returnType, statement, import)
+                    Map::class.asTypeName() -> responseAdapter.writeParameterizedMap(returnType, statement, import)
+                    else -> notSupport()
+                }
             }
         }
     }

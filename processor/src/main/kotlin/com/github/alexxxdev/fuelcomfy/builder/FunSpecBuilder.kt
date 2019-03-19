@@ -38,9 +38,9 @@ class FunSpecBuilder(private val element: ExecutableElement, private val message
 
         var maybeReturnTypeNameForSuspendFunction: TypeName? = null
         var suspended = false
-        val parameters: Map<String, Parameter> = parametersBuilder.build {
+        val parameters: Map<String, Parameter> = parametersBuilder.build { typeName ->
             suspended = true
-            maybeReturnTypeNameForSuspendFunction = it
+            maybeReturnTypeNameForSuspendFunction = typeName
         }.apply {
             forEach { func.addParameter(it.value.parameterSpec) }
         }

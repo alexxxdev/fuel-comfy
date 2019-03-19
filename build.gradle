@@ -65,7 +65,8 @@ detekt {
             "${project.rootDir}/api/src/main/kotlin",
             "${project.rootDir}/processor/src/main/kotlin",
             "${project.rootDir}/api/src/test/kotlin",
-            "${project.rootDir}/processor/test/main/kotlin"
+            "${project.rootDir}/processor/test/main/kotlin",
+            "${project.rootDir}/processor-coroutines/src/main/kotlin"
     )
     filters = ".*/resources/.*,.*/build/.*"
     reports {
