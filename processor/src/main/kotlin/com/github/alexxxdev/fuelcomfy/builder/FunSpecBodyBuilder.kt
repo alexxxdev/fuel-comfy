@@ -11,6 +11,7 @@ import com.squareup.kotlinpoet.ARRAY
 import com.squareup.kotlinpoet.ClassName
 import com.squareup.kotlinpoet.ParameterizedTypeName
 import com.squareup.kotlinpoet.TypeName
+import com.squareup.kotlinpoet.WildcardTypeName
 import com.squareup.kotlinpoet.asTypeName
 import javax.annotation.processing.Messager
 import javax.lang.model.element.ExecutableElement
@@ -75,6 +76,15 @@ class FunSpecBodyBuilder(private val element: ExecutableElement, private val mes
                 }
                 is ParameterizedTypeName -> {
                     when (((returnType as ParameterizedTypeName).typeArguments[0] as ParameterizedTypeName).rawType.javaToKotlinType()) {
+                        List::class.asTypeName() -> responseAdapter.writeList(returnType, statement, import)
+                        Set::class.asTypeName() -> responseAdapter.writeSet(returnType, statement, import)
+                        Map::class.asTypeName() -> responseAdapter.writeMap(returnType, statement, import)
+                        ARRAY -> notSupport()
+                        else -> buildForParameterizedClass(statement, import)
+                    }
+                }
+                is WildcardTypeName -> {
+                    when ((((returnType as ParameterizedTypeName).typeArguments[0] as WildcardTypeName).outTypes[0] as ParameterizedTypeName).rawType.javaToKotlinType()) {
                         List::class.asTypeName() -> responseAdapter.writeList(returnType, statement, import)
                         Set::class.asTypeName() -> responseAdapter.writeSet(returnType, statement, import)
                         Map::class.asTypeName() -> responseAdapter.writeMap(returnType, statement, import)

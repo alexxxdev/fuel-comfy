@@ -5,6 +5,7 @@ import com.github.alexxxdev.fuelcomfy.annotation.Param
 import com.github.alexxxdev.fuelcomfy.annotation.Query
 import com.github.alexxxdev.fuelcomfy.annotation.QueryMap
 import com.github.alexxxdev.fuelcomfy.javaToKotlinType
+import com.squareup.kotlinpoet.ClassName
 import com.squareup.kotlinpoet.ParameterSpec
 import com.squareup.kotlinpoet.ParameterizedTypeName
 import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
@@ -46,7 +47,11 @@ class ParametersBuilder(private val element: ExecutableElement, private val mess
 
                     val parameterizedBy =
                         parameterizedTypeName.rawType.parameterizedBy(
-                            parameterizedTypeName.typeArguments[0].javaToKotlinType(),
+                            when {
+                                parameterizedTypeName.typeArguments[0] is ClassName -> parameterizedTypeName.typeArguments[0].javaToKotlinType()
+                                parameterizedTypeName.typeArguments[0] is WildcardTypeName -> (parameterizedTypeName.typeArguments[0] as WildcardTypeName).outTypes[0].javaToKotlinType()
+                                else -> (parameterizedTypeName.typeArguments[0] as ParameterizedTypeName).javaToKotlinType()
+                            },
                             (parameterizedTypeName.typeArguments[1] as WildcardTypeName).outTypes[0].javaToKotlinType()
                         )
 

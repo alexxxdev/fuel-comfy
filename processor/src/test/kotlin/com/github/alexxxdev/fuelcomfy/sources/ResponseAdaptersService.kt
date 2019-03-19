@@ -7,6 +7,7 @@ import com.github.alexxxdev.fuelcomfy.annotation.Head
 import com.github.alexxxdev.fuelcomfy.annotation.Patch
 import com.github.alexxxdev.fuelcomfy.annotation.Post
 import com.github.alexxxdev.fuelcomfy.annotation.Put
+import com.github.alexxxdev.fuelcomfy.data.Data
 import com.github.alexxxdev.fuelcomfy.data.User
 import com.github.kittinunf.result.Result
 
@@ -21,7 +22,7 @@ interface ResponseAdaptersService {
     @Get("/get")
     suspend fun getUserListFunSuspend(): Result<List<User>, Exception>
 
-    /*@Get("/get")
+    @Get("/get")
     suspend fun getUserSetFunSuspend(): Result<Set<User>, Exception>
 
     @Get("/get")
@@ -64,7 +65,7 @@ interface ResponseAdaptersService {
     fun getUserSetDataFun(): Result<Data<Set<User>>, Exception>
 
     @Get("/get")
-    fun getUserMapDataFun(): Result<Data<Map<Int, User>>, Exception>*/
+    fun getUserMapDataFun(): Result<Data<Map<Int, User>>, Exception>
 
     @Post("/post")
     suspend fun postFun(): Result<Any, Exception>
