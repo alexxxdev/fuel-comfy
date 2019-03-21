@@ -71,7 +71,7 @@ class FunSpecBodyBuilder(private val element: ExecutableElement, private val mes
                     if (((returnType as ParameterizedTypeName).typeArguments[0] as ClassName).simpleName == Any::class.simpleName) {
                         responseAdapter.writeAnyClass(statement)
                     } else {
-                        responseAdapter.writeClass(returnType, statement)
+                        responseAdapter.writeClass(returnType, statement, import)
                     }
                 }
                 is ParameterizedTypeName -> {
@@ -112,7 +112,7 @@ class FunSpecBodyBuilder(private val element: ExecutableElement, private val mes
     private fun buildForParameterizedClass(statement: (String, Array<Any>) -> Unit, import: (ClassName) -> Unit) {
         (returnType as? ParameterizedTypeName)?.let { returnType ->
             if ((returnType.typeArguments[0] as ParameterizedTypeName).typeArguments[0] is ClassName) {
-                responseAdapter.writeParameterizedClass(returnType, statement)
+                responseAdapter.writeParameterizedClass(returnType, statement, import)
             } else if ((returnType.typeArguments[0] as ParameterizedTypeName).typeArguments[0] is ParameterizedTypeName) {
                 when (((returnType.typeArguments[0] as ParameterizedTypeName).typeArguments[0] as ParameterizedTypeName).rawType.javaToKotlinType()) {
                     List::class.asTypeName() -> responseAdapter.writeParameterizedList(returnType, statement, import)

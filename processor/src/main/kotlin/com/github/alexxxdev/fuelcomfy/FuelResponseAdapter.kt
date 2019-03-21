@@ -15,7 +15,7 @@ class FuelResponseAdapter : BaseResponseAdapter {
         statement("\t.response()", arrayOf())
     }
 
-    override fun writeClass(returnType: TypeName, statement: (String, Array<Any>) -> Unit) {
+    override fun writeClass(returnType: TypeName, statement: (String, Array<Any>) -> Unit, import: (ClassName) -> Unit) {
         returnType as ParameterizedTypeName
         statement(
             "\t.responseObject(%T<%T>(%T.serializer()))",
@@ -71,7 +71,7 @@ class FuelResponseAdapter : BaseResponseAdapter {
         )
     }
 
-    override fun writeParameterizedClass(returnType: TypeName, statement: (String, Array<Any>) -> Unit) {
+    override fun writeParameterizedClass(returnType: TypeName, statement: (String, Array<Any>) -> Unit, import: (ClassName) -> Unit) {
         returnType as ParameterizedTypeName
         val parameterizedType = returnType.typeArguments[0] as ParameterizedTypeName
         statement(
