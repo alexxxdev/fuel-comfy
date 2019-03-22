@@ -11,6 +11,7 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion"
     implementation "com.github.kittinunf.fuel:fuel:$fuelVersion"
     implementation "com.squareup:kotlinpoet:$kotlinpoetVersion"
+    implementation "org.jetbrains.kotlinx:kotlinx-serialization-runtime:$kotlinxSerializationVersion"
 }
 
 sourceCompatibility = "7"
