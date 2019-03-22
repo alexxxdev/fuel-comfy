@@ -3,6 +3,7 @@ package com.github.alexxxdev.fuelcomfy
 import com.squareup.kotlinpoet.ClassName
 import com.squareup.kotlinpoet.ParameterizedTypeName
 import com.squareup.kotlinpoet.TypeName
+import com.squareup.kotlinpoet.asClassName
 
 class FuelResponseAdapter : BaseResponseAdapter {
     private val kotlinxDeserializerOfClassName = ClassName("com.github.kittinunf.fuel.serialization", "kotlinxDeserializerOf")
@@ -15,14 +16,15 @@ class FuelResponseAdapter : BaseResponseAdapter {
         statement("\t.response()", arrayOf())
     }
 
-    override fun writeClass(returnType: TypeName, statement: (String, Array<Any>) -> Unit) {
+    override fun writeClass(returnType: TypeName, statement: (String, Array<Any>) -> Unit, import: (ClassName) -> Unit) {
         returnType as ParameterizedTypeName
         statement(
-            "\t.responseObject(%T<%T>(%T.serializer()))",
+            "\t.responseObject(%T<%T>(%T.serializer(), json = %T.json))",
             arrayOf(
                 kotlinxDeserializerOfClassName,
                 returnType.typeArguments[0],
-                returnType.typeArguments[0]
+                returnType.typeArguments[0],
+                SerializationStrategy::class.asClassName()
             )
         )
     }
@@ -32,11 +34,12 @@ class FuelResponseAdapter : BaseResponseAdapter {
         import(listClassName)
         val parameterizedType = returnType.typeArguments[0] as ParameterizedTypeName
         statement(
-            "\t.responseObject(%T<%T>(%T.serializer().list))",
+            "\t.responseObject(%T<%T>(%T.serializer().list, json = %T.json))",
             arrayOf(
                 kotlinxDeserializerOfClassName,
                 returnType.typeArguments[0],
-                parameterizedType.typeArguments[0]
+                parameterizedType.typeArguments[0],
+                SerializationStrategy::class.asClassName()
             )
         )
     }
@@ -46,11 +49,12 @@ class FuelResponseAdapter : BaseResponseAdapter {
         import(setClassName)
         val parameterizedType = returnType.typeArguments[0] as ParameterizedTypeName
         statement(
-            "\t.responseObject(%T<%T>(%T.serializer().set))",
+            "\t.responseObject(%T<%T>(%T.serializer().set, json = %T.json))",
             arrayOf(
                 kotlinxDeserializerOfClassName,
                 returnType.typeArguments[0],
-                parameterizedType.typeArguments[0]
+                parameterizedType.typeArguments[0],
+                SerializationStrategy::class.asClassName()
             )
         )
     }
@@ -61,26 +65,28 @@ class FuelResponseAdapter : BaseResponseAdapter {
         import(serializerClassName)
         val parameterizedType = returnType.typeArguments[0] as ParameterizedTypeName
         statement(
-            "\t.responseObject(%T<%T>((%T.serializer() to %T.serializer()).map))",
+            "\t.responseObject(%T<%T>((%T.serializer() to %T.serializer()).map, json = %T.json))",
             arrayOf(
                 kotlinxDeserializerOfClassName,
                 returnType.typeArguments[0],
                 parameterizedType.typeArguments[0],
-                parameterizedType.typeArguments[1]
+                parameterizedType.typeArguments[1],
+                SerializationStrategy::class.asClassName()
             )
         )
     }
 
-    override fun writeParameterizedClass(returnType: TypeName, statement: (String, Array<Any>) -> Unit) {
+    override fun writeParameterizedClass(returnType: TypeName, statement: (String, Array<Any>) -> Unit, import: (ClassName) -> Unit) {
         returnType as ParameterizedTypeName
         val parameterizedType = returnType.typeArguments[0] as ParameterizedTypeName
         statement(
-            "\t.responseObject(%T<%T>(%T.serializer(%T.serializer())))",
+            "\t.responseObject(%T<%T>(%T.serializer(%T.serializer()), json = %T.json))",
             arrayOf(
                 kotlinxDeserializerOfClassName,
                 returnType.typeArguments[0],
                 parameterizedType.rawType.javaToKotlinType(),
-                parameterizedType.typeArguments[0]
+                parameterizedType.typeArguments[0],
+                SerializationStrategy::class.asClassName()
             )
         )
     }
@@ -90,12 +96,13 @@ class FuelResponseAdapter : BaseResponseAdapter {
         import(listClassName)
         val parameterizedType = returnType.typeArguments[0] as ParameterizedTypeName
         statement(
-            "\t.responseObject(%T<%T>(%T.serializer(%T.serializer().list)))",
+            "\t.responseObject(%T<%T>(%T.serializer(%T.serializer().list), json = %T.json))",
             arrayOf(
                 kotlinxDeserializerOfClassName,
                 returnType.typeArguments[0],
                 parameterizedType.rawType.javaToKotlinType(),
-                (parameterizedType.typeArguments[0] as ParameterizedTypeName).typeArguments[0].javaToKotlinType()
+                (parameterizedType.typeArguments[0] as ParameterizedTypeName).typeArguments[0].javaToKotlinType(),
+                SerializationStrategy::class.asClassName()
             )
         )
     }
@@ -105,12 +112,13 @@ class FuelResponseAdapter : BaseResponseAdapter {
         import(setClassName)
         val parameterizedType = returnType.typeArguments[0] as ParameterizedTypeName
         statement(
-            "\t.responseObject(%T<%T>(%T.serializer(%T.serializer().set)))",
+            "\t.responseObject(%T<%T>(%T.serializer(%T.serializer().set), json = %T.json))",
             arrayOf(
                 kotlinxDeserializerOfClassName,
                 returnType.typeArguments[0],
                 parameterizedType.rawType.javaToKotlinType(),
-                (parameterizedType.typeArguments[0] as ParameterizedTypeName).typeArguments[0].javaToKotlinType()
+                (parameterizedType.typeArguments[0] as ParameterizedTypeName).typeArguments[0].javaToKotlinType(),
+                SerializationStrategy::class.asClassName()
             )
         )
     }
@@ -121,13 +129,14 @@ class FuelResponseAdapter : BaseResponseAdapter {
         import(serializerClassName)
         val parameterizedType = returnType.typeArguments[0] as ParameterizedTypeName
         statement(
-            "\t.responseObject(%T<%T>(%T.serializer((%T.serializer() to %T.serializer()).map)))",
+            "\t.responseObject(%T<%T>(%T.serializer((%T.serializer() to %T.serializer()).map), json = %T.json))",
             arrayOf(
                 kotlinxDeserializerOfClassName,
                 returnType.typeArguments[0],
                 parameterizedType.rawType.javaToKotlinType(),
                 (parameterizedType.typeArguments[0] as ParameterizedTypeName).typeArguments[0].javaToKotlinType(),
-                (parameterizedType.typeArguments[0] as ParameterizedTypeName).typeArguments[1].javaToKotlinType()
+                (parameterizedType.typeArguments[0] as ParameterizedTypeName).typeArguments[1].javaToKotlinType(),
+                SerializationStrategy::class.asClassName()
             )
         )
     }
