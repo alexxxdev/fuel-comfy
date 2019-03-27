@@ -45,24 +45,52 @@ h3 {
 
 <ul>
 <li>
-    number of kt files: 28
+number of kt files: 31
 </li>
 <li>
-    number of packages: 5
+number of packages: 4
 </li>
 <li>
-    number of classes: 28
+number of classes: 30
 </li>
 <li>
-    number of functions: 63
+number of functions: 74
 </li>
 <li>
-    number of properties: 98
+number of properties: 92
 </li>
 </ul>
 
 <h2>Findings</h2>
 <h3>complexity</h3>
+<div class="rule-container">
+<span class="rule">
+TooManyFunctions
+</span>
+<span class="description">
+Too many functions inside a/an file/class/object/interface always indicate a violation of the single responsibility principle. Maybe the file/class/object/interface wants to manage too many things at once. Extract functionality which clearly belongs together.
+</span>
+</div>
+<ul>
+<li>
+<span class="location">
+/home/alexxxdev/Android/projects/fuel-comfy/api/src/main/kotlin/com/github/alexxxdev/fuelcomfy/SerializationAdapter.kt:6:1
+</span>
+<br />
+<span class="message">
+Interface 'SerializationAdapter' with '16' functions detected. Defined threshold inside interfaces is set to '11'
+</span>
+</li>
+<li>
+<span class="location">
+/home/alexxxdev/Android/projects/fuel-comfy/processor/src/main/kotlin/com/github/alexxxdev/fuelcomfy/KotlinSerializationAdapter.kt:9:1
+</span>
+<br />
+<span class="message">
+Class 'KotlinSerializationAdapter' with '16' functions detected. Defined threshold inside classes is set to '11'
+</span>
+</li>
+</ul>
 <div class="rule-container">
 <span class="rule">
 NestedBlockDepth
@@ -93,7 +121,7 @@ Prefer splitting up complex methods into smaller, easier to understand methods.
 <ul>
 <li>
 <span class="location">
-/home/alexxxdev/Android/projects/fuel-comfy/processor/src/main/kotlin/com/github/alexxxdev/fuelcomfy/builder/FunSpecBodyBuilder.kt:63:5
+/home/alexxxdev/Android/projects/fuel-comfy/processor/src/main/kotlin/com/github/alexxxdev/fuelcomfy/builder/FunSpecBodyBuilder.kt:69:5
 </span>
 <br />
 <span class="message">
@@ -115,17 +143,26 @@ The function build appears to be too complex.
 <span class="rule">
 MaximumLineLength
 </span>
-    <span class="description">
+<span class="description">
 Reports lines with exceeded length
 </span>
 </div>
 <ul>
-    <li>
+<li>
 <span class="location">
-/home/alexxxdev/Android/projects/fuel-comfy/processor/src/main/kotlin/com/github/alexxxdev/fuelcomfy/builder/FunSpecBodyBuilder.kt:106:123
+/home/alexxxdev/Android/projects/fuel-comfy/processor/src/main/kotlin/com/github/alexxxdev/fuelcomfy/builder/FunSpecBodyBuilder.kt:113:41
 </span>
-        <br/>
-        <span class="message">
+<br />
+<span class="message">
+Exceeded max line length (140)
+</span>
+</li>
+<li>
+<span class="location">
+/home/alexxxdev/Android/projects/fuel-comfy/processor/src/main/kotlin/com/github/alexxxdev/fuelcomfy/builder/FunSpecBodyBuilder.kt:163:123
+</span>
+<br />
+<span class="message">
 Exceeded max line length (140)
 </span>
 </li>
@@ -151,7 +188,7 @@ Using a spread operator causes a full copy of the array to be created before cal
 </li>
 <li>
 <span class="location">
-/home/alexxxdev/Android/projects/fuel-comfy/processor/src/main/kotlin/com/github/alexxxdev/fuelcomfy/builder/FunSpecBuilder.kt:65:34
+/home/alexxxdev/Android/projects/fuel-comfy/processor/src/main/kotlin/com/github/alexxxdev/fuelcomfy/builder/FunSpecBuilder.kt:62:34
 </span>
 <br />
 <span class="message">
@@ -164,29 +201,38 @@ Using a spread operator causes a full copy of the array to be created before cal
 <span class="rule">
 MaxLineLength
 </span>
-    <span class="description">
+<span class="description">
 Line detected that is longer than the defined maximum line length in the code style.
 </span>
 </div>
 <ul>
-    <li>
+<li>
 <span class="location">
 /home/alexxxdev/Android/projects/fuel-comfy/api/src/main/kotlin/com/github/alexxxdev/fuelcomfy/annotation/Param.kt:4:143
 </span>
-        <br/>
-        <span class="message">
+<br />
+<span class="message">
 Line detected that is longer than the defined maximum line length in the code style.
 </span>
-    </li>
-    <li>
+</li>
+<li>
 <span class="location">
-/home/alexxxdev/Android/projects/fuel-comfy/processor/src/main/kotlin/com/github/alexxxdev/fuelcomfy/builder/FunSpecBodyBuilder.kt:107:151
+/home/alexxxdev/Android/projects/fuel-comfy/processor/src/main/kotlin/com/github/alexxxdev/fuelcomfy/builder/FunSpecBodyBuilder.kt:114:172
 </span>
-        <br/>
-        <span class="message">
+<br />
+<span class="message">
 Line detected that is longer than the defined maximum line length in the code style.
 </span>
-    </li>
+</li>
+<li>
+<span class="location">
+/home/alexxxdev/Android/projects/fuel-comfy/processor/src/main/kotlin/com/github/alexxxdev/fuelcomfy/builder/FunSpecBodyBuilder.kt:164:151
+</span>
+<br />
+<span class="message">
+Line detected that is longer than the defined maximum line length in the code style.
+</span>
+</li>
 </ul>
 
 </body>
