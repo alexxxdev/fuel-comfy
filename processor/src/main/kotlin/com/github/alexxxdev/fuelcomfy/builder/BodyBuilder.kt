@@ -29,13 +29,16 @@ class BodyBuilder(private val serializationAdapter: SerializationAdapter) {
                     ARRAY -> buildForArray(typeName, name, statement, import)
                     else -> buildForParameterizedClass(typeName, name, statement, import)
                 }
-                typeName.javaToKotlinType() == String::class.asTypeName() -> buildForString(
-                    typeName,
-                    name,
-                    statement,
-                    import
-                )
-                typeName.javaClass.isPrimitive -> buildForPrimitive(typeName, name, statement, import)
+                typeName.javaToKotlinType() == Any::class.asTypeName() -> buildForPrimitive(typeName, name, statement, import)
+                typeName.javaToKotlinType() == String::class.asTypeName() -> buildForString(typeName, name, statement, import)
+                typeName.javaToKotlinType() == Int::class.asTypeName() -> buildForPrimitive(typeName, name, statement, import)
+                typeName.javaToKotlinType() == Float::class.asTypeName() -> buildForPrimitive(typeName, name, statement, import)
+                typeName.javaToKotlinType() == Double::class.asTypeName() -> buildForPrimitive(typeName, name, statement, import)
+                typeName.javaToKotlinType() == Boolean::class.asTypeName() -> buildForPrimitive(typeName, name, statement, import)
+                typeName.javaToKotlinType() == Long::class.asTypeName() -> buildForPrimitive(typeName, name, statement, import)
+                typeName.javaToKotlinType() == Char::class.asTypeName() -> buildForPrimitive(typeName, name, statement, import)
+                typeName.javaToKotlinType() == Short::class.asTypeName() -> buildForPrimitive(typeName, name, statement, import)
+                typeName.javaToKotlinType() == Byte::class.asTypeName() -> buildForPrimitive(typeName, name, statement, import)
                 else -> buildForClass(typeName, name, statement, import)
             }
             return@forEach

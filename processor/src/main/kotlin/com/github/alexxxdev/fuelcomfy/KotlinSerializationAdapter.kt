@@ -14,10 +14,17 @@ class KotlinSerializationAdapter : SerializationAdapter {
     private val serializerClassName = ClassName("kotlinx.serialization", "serializer")
     private val jsonClassName = ClassName("kotlinx.serialization.json", "Json")
 
-    override fun deserializationAnyClass(returnType: TypeName, statement: (String, Array<Any>) -> Unit, import: (ClassName) -> Unit) = Unit
+    override fun deserializationAnyClass(
+        returnType: ParameterizedTypeName,
+        statement: (String, Array<Any>) -> Unit,
+        import: (ClassName) -> Unit
+    ) = Unit
 
-    override fun deserializationClass(returnType: TypeName, statement: (String, Array<Any>) -> Unit, import: (ClassName) -> Unit) {
-        returnType as ParameterizedTypeName
+    override fun deserializationClass(
+        returnType: ParameterizedTypeName,
+        statement: (String, Array<Any>) -> Unit,
+        import: (ClassName) -> Unit
+    ) {
         statement(
             "\t\t%T<%T>(%T.serializer())",
             arrayOf(
@@ -28,8 +35,11 @@ class KotlinSerializationAdapter : SerializationAdapter {
         )
     }
 
-    override fun deserializationList(returnType: TypeName, statement: (String, Array<Any>) -> Unit, import: (ClassName) -> Unit) {
-        returnType as ParameterizedTypeName
+    override fun deserializationList(
+        returnType: ParameterizedTypeName,
+        statement: (String, Array<Any>) -> Unit,
+        import: (ClassName) -> Unit
+    ) {
         import(listClassName)
         import(jsonClassName)
         val parameterizedType = returnType.typeArguments[0] as ParameterizedTypeName
@@ -44,8 +54,7 @@ class KotlinSerializationAdapter : SerializationAdapter {
         )
     }
 
-    override fun deserializationSet(returnType: TypeName, statement: (String, Array<Any>) -> Unit, import: (ClassName) -> Unit) {
-        returnType as ParameterizedTypeName
+    override fun deserializationSet(returnType: ParameterizedTypeName, statement: (String, Array<Any>) -> Unit, import: (ClassName) -> Unit) {
         import(setClassName)
         import(jsonClassName)
         val parameterizedType = returnType.typeArguments[0] as ParameterizedTypeName
@@ -60,8 +69,7 @@ class KotlinSerializationAdapter : SerializationAdapter {
         )
     }
 
-    override fun deserializationMap(returnType: TypeName, statement: (String, Array<Any>) -> Unit, import: (ClassName) -> Unit) {
-        returnType as ParameterizedTypeName
+    override fun deserializationMap(returnType: ParameterizedTypeName, statement: (String, Array<Any>) -> Unit, import: (ClassName) -> Unit) {
         import(mapClassName)
         import(serializerClassName)
         import(jsonClassName)
@@ -79,11 +87,10 @@ class KotlinSerializationAdapter : SerializationAdapter {
     }
 
     override fun deserializationParameterizedClass(
-        returnType: TypeName,
+        returnType: ParameterizedTypeName,
         statement: (String, Array<Any>) -> Unit,
         import: (ClassName) -> Unit
     ) {
-        returnType as ParameterizedTypeName
         import(jsonClassName)
         val parameterizedType = returnType.typeArguments[0] as ParameterizedTypeName
         statement(
@@ -99,11 +106,10 @@ class KotlinSerializationAdapter : SerializationAdapter {
     }
 
     override fun deserializationParameterizedList(
-        returnType: TypeName,
+        returnType: ParameterizedTypeName,
         statement: (String, Array<Any>) -> Unit,
         import: (ClassName) -> Unit
     ) {
-        returnType as ParameterizedTypeName
         import(listClassName)
         import(jsonClassName)
         val parameterizedType = returnType.typeArguments[0] as ParameterizedTypeName
@@ -120,11 +126,10 @@ class KotlinSerializationAdapter : SerializationAdapter {
     }
 
     override fun deserializationParameterizedSet(
-        returnType: TypeName,
+        returnType: ParameterizedTypeName,
         statement: (String, Array<Any>) -> Unit,
         import: (ClassName) -> Unit
     ) {
-        returnType as ParameterizedTypeName
         import(setClassName)
         import(jsonClassName)
         val parameterizedType = returnType.typeArguments[0] as ParameterizedTypeName
@@ -141,11 +146,10 @@ class KotlinSerializationAdapter : SerializationAdapter {
     }
 
     override fun deserializationParameterizedMap(
-        returnType: TypeName,
+        returnType: ParameterizedTypeName,
         statement: (String, Array<Any>) -> Unit,
         import: (ClassName) -> Unit
     ) {
-        returnType as ParameterizedTypeName
         import(mapClassName)
         import(serializerClassName)
         import(jsonClassName)
@@ -191,12 +195,11 @@ class KotlinSerializationAdapter : SerializationAdapter {
     }
 
     override fun serializationArray(
-        typeName: TypeName,
+        typeName: ParameterizedTypeName,
         name: String,
         statement: (String, Array<Any>) -> Unit,
         import: (ClassName) -> Unit
     ) {
-        typeName as ParameterizedTypeName
         import(ClassName("kotlinx.serialization", "list"))
         statement(
             "\t\t%T.stringify(%T.serializer().list, %N.toList())",
@@ -205,12 +208,11 @@ class KotlinSerializationAdapter : SerializationAdapter {
     }
 
     override fun serializationList(
-        typeName: TypeName,
+        typeName: ParameterizedTypeName,
         name: String,
         statement: (String, Array<Any>) -> Unit,
         import: (ClassName) -> Unit
     ) {
-        typeName as ParameterizedTypeName
         import(ClassName("kotlinx.serialization", "list"))
         statement(
             "\t\t%T.stringify(%T.serializer().list, %N)",
@@ -219,12 +221,11 @@ class KotlinSerializationAdapter : SerializationAdapter {
     }
 
     override fun serializationSet(
-        typeName: TypeName,
+        typeName: ParameterizedTypeName,
         name: String,
         statement: (String, Array<Any>) -> Unit,
         import: (ClassName) -> Unit
     ) {
-        typeName as ParameterizedTypeName
         import(ClassName("kotlinx.serialization", "set"))
         statement(
             "\t\t%T.stringify(%T.serializer().set, %N)",
@@ -233,12 +234,11 @@ class KotlinSerializationAdapter : SerializationAdapter {
     }
 
     override fun serializationMap(
-        typeName: TypeName,
+        typeName: ParameterizedTypeName,
         name: String,
         statement: (String, Array<Any>) -> Unit,
         import: (ClassName) -> Unit
     ) {
-        typeName as ParameterizedTypeName
         import(ClassName("kotlinx.serialization", "map"))
         import(ClassName("kotlinx.serialization", "serializer"))
         statement(

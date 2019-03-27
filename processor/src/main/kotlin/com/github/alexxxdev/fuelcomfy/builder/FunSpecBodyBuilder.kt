@@ -70,10 +70,10 @@ class FunSpecBodyBuilder(private val element: ExecutableElement, private val mes
         statement: (String, Array<Any>) -> Unit,
         import: (ClassName) -> Unit
     ) {
-        if (returnType is ParameterizedTypeName) {
-            when ((returnType as ParameterizedTypeName).typeArguments[0]) {
+        (returnType as? ParameterizedTypeName)?.let { returnType ->
+            when (returnType.typeArguments[0]) {
                 is ClassName -> {
-                    if (((returnType as ParameterizedTypeName).typeArguments[0] as ClassName).simpleName == Any::class.simpleName) {
+                    if ((returnType.typeArguments[0] as ClassName).simpleName == Any::class.simpleName) {
                         responseAdapter.writeString(statement, import) {
                             serializationAdapter.deserializationAnyClass(returnType, statement, import)
                         }
@@ -84,7 +84,7 @@ class FunSpecBodyBuilder(private val element: ExecutableElement, private val mes
                     }
                 }
                 is ParameterizedTypeName -> {
-                    when (((returnType as ParameterizedTypeName).typeArguments[0] as ParameterizedTypeName).rawType.javaToKotlinType()) {
+                    when ((returnType.typeArguments[0] as ParameterizedTypeName).rawType.javaToKotlinType()) {
                         List::class.asTypeName() -> responseAdapter.writeObject(statement, import) {
                             serializationAdapter.deserializationList(
                                 returnType,
@@ -111,7 +111,7 @@ class FunSpecBodyBuilder(private val element: ExecutableElement, private val mes
                     }
                 }
                 is WildcardTypeName -> {
-                    when ((((returnType as ParameterizedTypeName).typeArguments[0] as WildcardTypeName).outTypes[0] as ParameterizedTypeName).rawType.javaToKotlinType()) {
+                    when (((returnType.typeArguments[0] as WildcardTypeName).outTypes[0] as ParameterizedTypeName).rawType.javaToKotlinType()) {
                         List::class.asTypeName() -> responseAdapter.writeObject(statement, import) {
                             serializationAdapter.deserializationList(
                                 returnType,

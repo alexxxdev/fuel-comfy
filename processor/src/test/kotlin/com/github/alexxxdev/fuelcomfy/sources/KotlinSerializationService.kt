@@ -12,6 +12,15 @@ import com.github.kittinunf.result.Result
 interface KotlinSerializationService {
 
     @Post("/post")
+    fun postAnyFun(@Body user: Any): Result<Any, Exception>
+
+    @Post("/post")
+    fun postIntFun(@Body user: Int): Result<Int, Exception>
+
+    @Post("/post")
+    fun postStringFun(@Body user: String): Result<String, Exception>
+
+    @Post("/post")
     fun postUserFun(@Body user: User): Result<User, Exception>
 
     @Post("/post")

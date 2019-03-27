@@ -8,37 +8,37 @@ class GsonAdapter : SerializationAdapter {
     private val gsonDeserializerClassName = ClassName("com.github.kittinunf.fuel.gson", "gsonDeserializer")
     private val jsonClassName = ClassName("kotlinx.serialization.json", "Json")
 
-    override fun deserializationAnyClass(returnType: TypeName, statement: (String, Array<Any>) -> Unit, import: (ClassName) -> Unit) = Unit
+    override fun deserializationAnyClass(returnType: ParameterizedTypeName, statement: (String, Array<Any>) -> Unit, import: (ClassName) -> Unit) = Unit
 
-    override fun deserializationClass(returnType: TypeName, statement: (String, Array<Any>) -> Unit, import: (ClassName) -> Unit) {
+    override fun deserializationClass(returnType: ParameterizedTypeName, statement: (String, Array<Any>) -> Unit, import: (ClassName) -> Unit) {
         deserialization(returnType, statement, import)
     }
 
-    override fun deserializationList(returnType: TypeName, statement: (String, Array<Any>) -> Unit, import: (ClassName) -> Unit) {
+    override fun deserializationList(returnType: ParameterizedTypeName, statement: (String, Array<Any>) -> Unit, import: (ClassName) -> Unit) {
         deserialization(returnType, statement, import)
     }
 
-    override fun deserializationSet(returnType: TypeName, statement: (String, Array<Any>) -> Unit, import: (ClassName) -> Unit) {
+    override fun deserializationSet(returnType: ParameterizedTypeName, statement: (String, Array<Any>) -> Unit, import: (ClassName) -> Unit) {
         deserialization(returnType, statement, import)
     }
 
-    override fun deserializationMap(returnType: TypeName, statement: (String, Array<Any>) -> Unit, import: (ClassName) -> Unit) {
+    override fun deserializationMap(returnType: ParameterizedTypeName, statement: (String, Array<Any>) -> Unit, import: (ClassName) -> Unit) {
         deserialization(returnType, statement, import)
     }
 
-    override fun deserializationParameterizedClass(returnType: TypeName, statement: (String, Array<Any>) -> Unit, import: (ClassName) -> Unit) {
+    override fun deserializationParameterizedClass(returnType: ParameterizedTypeName, statement: (String, Array<Any>) -> Unit, import: (ClassName) -> Unit) {
         deserialization(returnType, statement, import)
     }
 
-    override fun deserializationParameterizedList(returnType: TypeName, statement: (String, Array<Any>) -> Unit, import: (ClassName) -> Unit) {
+    override fun deserializationParameterizedList(returnType: ParameterizedTypeName, statement: (String, Array<Any>) -> Unit, import: (ClassName) -> Unit) {
         deserialization(returnType, statement, import)
     }
 
-    override fun deserializationParameterizedSet(returnType: TypeName, statement: (String, Array<Any>) -> Unit, import: (ClassName) -> Unit) {
+    override fun deserializationParameterizedSet(returnType: ParameterizedTypeName, statement: (String, Array<Any>) -> Unit, import: (ClassName) -> Unit) {
         deserialization(returnType, statement, import)
     }
 
-    override fun deserializationParameterizedMap(returnType: TypeName, statement: (String, Array<Any>) -> Unit, import: (ClassName) -> Unit) {
+    override fun deserializationParameterizedMap(returnType: ParameterizedTypeName, statement: (String, Array<Any>) -> Unit, import: (ClassName) -> Unit) {
         deserialization(returnType, statement, import)
     }
 
@@ -54,19 +54,19 @@ class GsonAdapter : SerializationAdapter {
         serialization(typeName, name, statement, import)
     }
 
-    override fun serializationArray(typeName: TypeName, name: String, statement: (String, Array<Any>) -> Unit, import: (ClassName) -> Unit) {
+    override fun serializationArray(typeName: ParameterizedTypeName, name: String, statement: (String, Array<Any>) -> Unit, import: (ClassName) -> Unit) {
         serialization(typeName, name, statement, import)
     }
 
-    override fun serializationList(typeName: TypeName, name: String, statement: (String, Array<Any>) -> Unit, import: (ClassName) -> Unit) {
+    override fun serializationList(typeName: ParameterizedTypeName, name: String, statement: (String, Array<Any>) -> Unit, import: (ClassName) -> Unit) {
         serialization(typeName, name, statement, import)
     }
 
-    override fun serializationSet(typeName: TypeName, name: String, statement: (String, Array<Any>) -> Unit, import: (ClassName) -> Unit) {
+    override fun serializationSet(typeName: ParameterizedTypeName, name: String, statement: (String, Array<Any>) -> Unit, import: (ClassName) -> Unit) {
         serialization(typeName, name, statement, import)
     }
 
-    override fun serializationMap(typeName: TypeName, name: String, statement: (String, Array<Any>) -> Unit, import: (ClassName) -> Unit) {
+    override fun serializationMap(typeName: ParameterizedTypeName, name: String, statement: (String, Array<Any>) -> Unit, import: (ClassName) -> Unit) {
         serialization(typeName, name, statement, import)
     }
 
@@ -82,8 +82,7 @@ class GsonAdapter : SerializationAdapter {
         )
     }
 
-    private fun deserialization(returnType: TypeName, statement: (String, Array<Any>) -> Unit, import: (ClassName) -> Unit) {
-        returnType as ParameterizedTypeName
+    private fun deserialization(returnType: ParameterizedTypeName, statement: (String, Array<Any>) -> Unit, import: (ClassName) -> Unit) {
         import(jsonClassName)
         statement(
             "\t\t%T<%T>()",
