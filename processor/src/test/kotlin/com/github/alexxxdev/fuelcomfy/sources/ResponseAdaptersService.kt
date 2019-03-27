@@ -1,5 +1,6 @@
 package com.github.alexxxdev.fuelcomfy.sources
 
+import com.github.alexxxdev.fuelcomfy.KotlinSerializationAdapter
 import com.github.alexxxdev.fuelcomfy.annotation.Delete
 import com.github.alexxxdev.fuelcomfy.annotation.FuelInterface
 import com.github.alexxxdev.fuelcomfy.annotation.Get
@@ -11,7 +12,7 @@ import com.github.alexxxdev.fuelcomfy.data.Data
 import com.github.alexxxdev.fuelcomfy.data.User
 import com.github.kittinunf.result.Result
 
-@FuelInterface
+@FuelInterface(KotlinSerializationAdapter::class)
 interface ResponseAdaptersService {
     @Get("/get")
     suspend fun getFunSuspend(): Result<Any, Exception>

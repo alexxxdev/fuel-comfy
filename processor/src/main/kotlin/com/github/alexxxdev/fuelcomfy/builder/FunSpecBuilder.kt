@@ -15,7 +15,7 @@ import javax.annotation.processing.Messager
 import javax.lang.model.element.ExecutableElement
 import javax.tools.Diagnostic
 
-class FunSpecBuilder(private val element: ExecutableElement, private val messager: Messager) {
+class FunSpecBuilder(private val element: ExecutableElement, private val messager: Messager, private val serializationAdapter: String) {
     private val httpMethod: Pair<Method, String>? = listOfNotNull(
         element.getAnnotation(Get::class.java)?.let { Method.GET to it.value },
         element.getAnnotation(Post::class.java)?.let { Method.POST to it.value },
@@ -55,6 +55,7 @@ class FunSpecBuilder(private val element: ExecutableElement, private val message
             this.method = httpMethod
             this.parameters = parameters
             this.suspended = suspended
+            this.serializationAdapterKClass = serializationAdapter
             returnType?.let { this.returnType = it }
 
             build({ str, params ->

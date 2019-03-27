@@ -12,12 +12,12 @@ import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
 import com.squareup.kotlinpoet.TypeName
 import com.squareup.kotlinpoet.WildcardTypeName
 import com.squareup.kotlinpoet.asTypeName
-import org.jetbrains.annotations.NotNull
 import javax.annotation.processing.Messager
 import javax.lang.model.element.ExecutableElement
 import javax.lang.model.element.VariableElement
 import javax.tools.Diagnostic
 import kotlin.coroutines.Continuation
+import org.jetbrains.annotations.NotNull
 
 class ParametersBuilder(private val element: ExecutableElement, private val messager: Messager) {
     private val parameters: List<Pair<VariableElement, Annotation>> = element.parameters.mapNotNull { element ->
@@ -48,8 +48,12 @@ class ParametersBuilder(private val element: ExecutableElement, private val mess
                     val parameterizedBy =
                         parameterizedTypeName.rawType.parameterizedBy(
                             when {
-                                parameterizedTypeName.typeArguments[0] is ClassName -> parameterizedTypeName.typeArguments[0].javaToKotlinType()
-                                parameterizedTypeName.typeArguments[0] is WildcardTypeName -> (parameterizedTypeName.typeArguments[0] as WildcardTypeName).outTypes[0].javaToKotlinType()
+                                parameterizedTypeName.typeArguments[0] is ClassName -> {
+                                    parameterizedTypeName.typeArguments[0].javaToKotlinType()
+                                }
+                                parameterizedTypeName.typeArguments[0] is WildcardTypeName -> {
+                                    (parameterizedTypeName.typeArguments[0] as WildcardTypeName).outTypes[0].javaToKotlinType()
+                                }
                                 else -> (parameterizedTypeName.typeArguments[0] as ParameterizedTypeName).javaToKotlinType()
                             },
                             (parameterizedTypeName.typeArguments[1] as WildcardTypeName).outTypes[0].javaToKotlinType()
