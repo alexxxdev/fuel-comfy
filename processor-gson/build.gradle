@@ -12,3 +12,13 @@ dependencies {
     implementation "com.github.kittinunf.fuel:fuel-gson:$fuelVersion"
     implementation "com.squareup:kotlinpoet:$kotlinpoetVersion"
 }
+
+
+test {
+    useJUnitPlatform {
+        includeEngines 'spek2'
+    }
+}
+
+sourceCompatibility = "7"
+targetCompatibility = "7"
