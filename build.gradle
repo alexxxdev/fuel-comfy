@@ -5,7 +5,7 @@ buildscript {
     ext.kotlinxSerializationVersion = '0.10.0'
     ext.detektGradlePluginVersion = '1.0.0-RC14'
     ext.gradleVersionsPlugin = '0.20.0'
-    ext.kotlinpoetVersion = '1.0.1'
+    ext.kotlinpoetVersion = '1.2.0'
     ext.fuelVersion = '2.0.1'
     ext.spekVersion = '2.0.0'
     ext.okio = '2.2.2'
