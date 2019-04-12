@@ -20,5 +20,5 @@ test {
     }
 }
 
-sourceCompatibility = "8"
-targetCompatibility = "8"
+sourceCompatibility = "7"
+targetCompatibility = "7"
