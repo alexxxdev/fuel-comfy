@@ -7,9 +7,9 @@ buildscript {
     ext.gradleVersionsPlugin = '0.20.0'
     ext.kotlinpoetVersion = '1.2.0'
     ext.fuelVersion = '2.0.1'
-    ext.spekVersion = '2.0.0'
+    ext.spekVersion = '2.0.2'
     ext.okio = '2.2.2'
-    ext.mockwebserver = '3.13.1'
+    ext.mockwebserver = '3.14.1'
 
     repositories {
         maven { url "https://kotlin.bintray.com/kotlinx" }
