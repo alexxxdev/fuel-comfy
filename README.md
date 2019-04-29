@@ -125,8 +125,12 @@ allprojects {
 Add the dependency
 ```groovy
 dependencies {
-    implementation 'com.github.alexxxdev.fuel-comfy:api:-SNAPSHOT'
-    kapt 'com.github.alexxxdev.fuel-comfy:processor:-SNAPSHOT'
+    implementation 'com.github.alexxxdev.fuel-comfy:api:<version>'    
+    kapt 'com.github.alexxxdev.fuel-comfy:processor:<version>'
+    
+    //optional
+    implementation 'com.github.alexxxdev.fuel-comfy:processor-coroutines:<version>'
+    implementation 'com.github.alexxxdev.fuel-comfy:processor-gson:<version>'
 }
 ```
 
