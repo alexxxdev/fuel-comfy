@@ -2,7 +2,7 @@
 [![Kotlin](https://img.shields.io/badge/Kotlin-1.3.21-blue.svg)](https://kotlinlang.org)
 [![Fuel](https://img.shields.io/badge/Fuel-2.0.1-blue.svg)](https://github.com/kittinunf/fuel)
 [![](https://jitpack.io/v/alexxxdev/fuel-comfy.svg)](https://jitpack.io/#alexxxdev/fuel-comfy)
-[![License](https://img.shields.io/badge/license-Apache%202-4EB1BA.svg?style=flat-square)](https://www.apache.org/licenses/LICENSE-2.0.html)
+[![License](https://img.shields.io/badge/license-Apache%202-4EB1BA.svg?style=flat-flat)](https://www.apache.org/licenses/LICENSE-2.0.html)
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Falexxxdev%2Ffuel-comfy.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Falexxxdev%2Ffuel-comfy?ref=badge_shield)
 [![Build Status](https://travis-ci.org/alexxxdev/fuel-comfy.svg?branch=master)](https://travis-ci.org/alexxxdev/fuel-comfy)
 [![codecov](https://codecov.io/gh/alexxxdev/fuel-comfy/branch/master/graph/badge.svg)](https://codecov.io/gh/alexxxdev/fuel-comfy)
