@@ -8,6 +8,7 @@
 [![codecov](https://codecov.io/gh/alexxxdev/fuel-comfy/branch/master/graph/badge.svg)](https://codecov.io/gh/alexxxdev/fuel-comfy)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/f3522966b0364e579c71fbed7b04b36a)](https://www.codacy.com/app/alexxxdev/fuel-comfy?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=alexxxdev/fuel-comfy&amp;utm_campaign=Badge_Grade)
 [![codebeat badge](https://codebeat.co/badges/f5c150b2-7fd5-4317-980a-d5369f8a39c7)](https://codebeat.co/projects/github-com-alexxxdev-fuel-comfy-master)
+[![Hits-of-Code](https://hitsofcode.com/github/alexxxdev/fuel-comfy)](https://hitsofcode.com/view/github/alexxxdev/fuel-comfy)
 
 More comfortable use of [Fuel](https://github.com/kittinunf/fuel) as in [Retrofit](https://square.github.io/retrofit/) or [Feign](https://github.com/OpenFeign/feign) for Kotlin/Android
 
