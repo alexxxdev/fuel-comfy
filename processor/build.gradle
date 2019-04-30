@@ -44,8 +44,8 @@ dependencies {
     testImplementation "com.squareup.okio:okio:$okio"
 }
 
-sourceCompatibility = "7"
-targetCompatibility = "7"
+sourceCompatibility = "8"
+targetCompatibility = "8"
 
 test {
     useJUnitPlatform {

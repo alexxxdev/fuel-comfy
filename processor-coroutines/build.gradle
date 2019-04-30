@@ -9,7 +9,7 @@ sourceSets {
 dependencies {
     compileOnly project(':api')
 
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
     implementation "com.github.kittinunf.fuel:fuel-coroutines:$fuelVersion"
     implementation "com.squareup:kotlinpoet:$kotlinpoetVersion"
 }

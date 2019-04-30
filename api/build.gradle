@@ -7,15 +7,15 @@ sourceSets {
 }
 
 dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
     implementation "org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion"
     implementation "com.github.kittinunf.fuel:fuel:$fuelVersion"
     implementation "com.squareup:kotlinpoet:$kotlinpoetVersion"
     implementation "org.jetbrains.kotlinx:kotlinx-serialization-runtime:$kotlinxSerializationVersion"
 }
 
-sourceCompatibility = "7"
-targetCompatibility = "7"
+sourceCompatibility = "8"
+targetCompatibility = "8"
 
 test {
     useJUnitPlatform {
