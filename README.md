@@ -131,8 +131,8 @@ dependencies {
     kapt 'com.github.alexxxdev.fuel-comfy:processor:<version>'
     
     //optional
-    implementation 'com.github.alexxxdev.fuel-comfy:processor-coroutines:<version>'
-    implementation 'com.github.alexxxdev.fuel-comfy:processor-gson:<version>'
+    kapt 'com.github.alexxxdev.fuel-comfy:processor-coroutines:<version>'
+    kapt 'com.github.alexxxdev.fuel-comfy:processor-gson:<version>'
 }
 ```
 
