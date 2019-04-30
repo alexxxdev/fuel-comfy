@@ -65,9 +65,10 @@ test {
         def coverageSourceDirs = [
                 "src/main/kotlin",
                 "../processor-coroutines/src/main/kotlin",
-                "../processor-gson/src/main/kotlin"
+                "../processor-gson/src/main/kotlin",
+                "../api/src/main/kotlin"
         ]
-        additionalClassDirs = files(["../processor-coroutines/build/classes/kotlin/main","../processor-gson/build/classes/kotlin/main"])
+        additionalClassDirs = files(["../processor-coroutines/build/classes/kotlin/main","../processor-gson/build/classes/kotlin/main","../api/build/classes/kotlin/main"])
         additionalSourceDirs = files(coverageSourceDirs)
         sourceDirectories = files(coverageSourceDirs)
         executionData = files("$buildDir/jacoco/junitPlatformTest.exec")
