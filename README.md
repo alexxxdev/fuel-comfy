@@ -11,7 +11,7 @@
 [![Hits-of-Code](https://hitsofcode.com/github/alexxxdev/fuel-comfy)](https://hitsofcode.com/view/github/alexxxdev/fuel-comfy)
 
 [![Kotlin](https://img.shields.io/badge/Kotlin-1.3.31-blue.svg)](https://kotlinlang.org)
-[![Fuel](https://img.shields.io/badge/Fuel-2.0.1-blue.svg)](https://github.com/kittinunf/fuel)
+[![Fuel](https://img.shields.io/badge/Fuel-2.1.0-blue.svg)](https://github.com/kittinunf/fuel)
 
 More comfortable use of [Fuel](https://github.com/kittinunf/fuel) as in [Retrofit](https://square.github.io/retrofit/) or [Feign](https://github.com/OpenFeign/feign) for Kotlin/Android
 
