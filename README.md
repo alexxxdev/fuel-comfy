@@ -2,14 +2,12 @@
 [![](https://jitpack.io/v/alexxxdev/fuel-comfy.svg)](https://jitpack.io/#alexxxdev/fuel-comfy)
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-fuel--comfy-brightgreen.svg?style=flat)](https://android-arsenal.com/details/1/7637)
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Falexxxdev%2Ffuel-comfy.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Falexxxdev%2Ffuel-comfy?ref=badge_shield)
-[![License](https://img.shields.io/badge/license-Apache%202-4EB1BA.svg?style=flat-flat)](https://www.apache.org/licenses/LICENSE-2.0.html)
-
+[![License](https://img.shields.io/badge/license-Apache%202-4EB1BA.svg?style=flat-flat)](https://www.apache.org/licenses/LICENSE-2.0.html)  
 [![Build Status](https://travis-ci.org/alexxxdev/fuel-comfy.svg?branch=master)](https://travis-ci.org/alexxxdev/fuel-comfy)
 [![codecov](https://codecov.io/gh/alexxxdev/fuel-comfy/branch/master/graph/badge.svg)](https://codecov.io/gh/alexxxdev/fuel-comfy)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/f3522966b0364e579c71fbed7b04b36a)](https://www.codacy.com/app/alexxxdev/fuel-comfy?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=alexxxdev/fuel-comfy&amp;utm_campaign=Badge_Grade)
 [![codebeat badge](https://codebeat.co/badges/f5c150b2-7fd5-4317-980a-d5369f8a39c7)](https://codebeat.co/projects/github-com-alexxxdev-fuel-comfy-master)
-[![Hits-of-Code](https://hitsofcode.com/github/alexxxdev/fuel-comfy)](https://hitsofcode.com/view/github/alexxxdev/fuel-comfy)
-
+[![Hits-of-Code](https://hitsofcode.com/github/alexxxdev/fuel-comfy)](https://hitsofcode.com/view/github/alexxxdev/fuel-comfy)  
 [![Kotlin](https://img.shields.io/badge/Kotlin-1.3.31-blue.svg)](https://kotlinlang.org)
 [![Fuel](https://img.shields.io/badge/Fuel-2.1.0-blue.svg)](https://github.com/kittinunf/fuel)
 
