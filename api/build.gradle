@@ -14,6 +14,11 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-serialization-runtime:$kotlinxSerializationVersion"
 }
 
+group = 'com.github.alexxxdev.fuelcomfy'
+archivesBaseName = 'api'
+version = '1.0.10'
+description ="More comfortable use of Fuel as in Retrofit or Feign for Kotlin/Android"
+
 sourceCompatibility = "8"
 targetCompatibility = "8"
 
