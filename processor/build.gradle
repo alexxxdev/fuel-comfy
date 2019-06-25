@@ -44,6 +44,11 @@ dependencies {
     testImplementation "com.squareup.okio:okio:$okio"
 }
 
+group = 'com.github.alexxxdev.fuelcomfy'
+archivesBaseName = 'processor'
+version = '1.0.10'
+description ="More comfortable use of Fuel as in Retrofit or Feign for Kotlin/Android"
+
 sourceCompatibility = "8"
 targetCompatibility = "8"
 
