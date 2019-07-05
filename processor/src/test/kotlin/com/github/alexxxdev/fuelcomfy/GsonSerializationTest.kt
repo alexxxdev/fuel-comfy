@@ -8,7 +8,7 @@ import kotlin.test.assertNotNull
 import kotlin.test.assertTrue
 
 object GsonSerializationTest : BaseTest({
-    var kclass: GsonSerializationService? = null
+    var kclass: GsonSerializationService?
 
     group("Prepare class with suspend functions") {
         val resultGenerate = generateClass()

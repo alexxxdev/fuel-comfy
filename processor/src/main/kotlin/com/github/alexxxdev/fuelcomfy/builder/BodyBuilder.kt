@@ -27,7 +27,7 @@ class BodyBuilder(private val serializationAdapter: SerializationAdapter) {
                     Set::class.asTypeName() -> buildForSet(typeName, name, statement, import)
                     Map::class.asTypeName() -> buildForMap(typeName, name, statement, import)
                     ARRAY -> buildForArray(typeName, name, statement, import)
-                    else -> buildForParameterizedClass(typeName, name, statement, import)
+                    else -> Unit//buildForParameterizedClass(typeName, name, statement, import)
                 }
                 typeName.javaToKotlinType() == Any::class.asTypeName() -> buildForPrimitive(typeName, name, statement, import)
                 typeName.javaToKotlinType() == String::class.asTypeName() -> buildForString(typeName, name, statement, import)
@@ -64,7 +64,7 @@ class BodyBuilder(private val serializationAdapter: SerializationAdapter) {
         statement("\t)", arrayOf())
     }
 
-    private fun buildForParameterizedClass(
+    /*private fun buildForParameterizedClass(
         typeName: ParameterizedTypeName,
         name: String,
         statement: (String, Array<Any>) -> Unit,
@@ -75,7 +75,7 @@ class BodyBuilder(private val serializationAdapter: SerializationAdapter) {
         // JSON.stringify(Data.serializer(User.serializer().list), userData) for userData: Data<List<User>>
         // JSON.stringify(Data.serializer(User.serializer().set), userData) for userData: Data<Set<User>>
         // JSON.stringify(Data2.serializer(String.serializer(), User.serializer()), userData) for userData: Data2<String, User>
-    }
+    }*/
 
     private fun buildForArray(
         typeName: ParameterizedTypeName,
