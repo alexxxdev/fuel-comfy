@@ -8,7 +8,7 @@ import kotlin.test.assertNotNull
 import kotlin.test.assertTrue
 
 object KotlinSerializationTest : BaseTest({
-    var kclass: KotlinSerializationService? = null
+    var kclass: KotlinSerializationService?
 
     group("Prepare class with suspend functions") {
         val resultGenerate = generateClass()

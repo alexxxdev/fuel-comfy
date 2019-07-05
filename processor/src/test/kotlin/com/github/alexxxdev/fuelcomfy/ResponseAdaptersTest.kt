@@ -8,7 +8,7 @@ import kotlin.test.assertNotNull
 import kotlin.test.assertTrue
 
 object ResponseAdaptersTest : BaseTest({
-    var kclass: ResponseAdaptersService? = null
+    var kclass: ResponseAdaptersService?
 
     group("Prepare class with suspend functions") {
         val resultGenerate = generateClass()

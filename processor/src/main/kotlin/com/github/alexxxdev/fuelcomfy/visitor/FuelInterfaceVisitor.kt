@@ -37,16 +37,16 @@ class FuelInterfaceVisitor(
     private var serializationAdapter: String? = null
 
     override fun visitType(element: TypeElement?, p1: Any?): Any? {
-        element?.let { element ->
-            if (element.kind == ElementKind.INTERFACE) {
+        element?.let { elm ->
+            if (elm.kind == ElementKind.INTERFACE) {
                 val packageName = elementUtils.getPackageOf(element).qualifiedName.toString()
-                val className = element.simpleName.toString()
+                val className = elm.simpleName.toString()
                 file = FileSpec.builder(packageName, className + SUFFIX)
                 clazz = TypeSpec.classBuilder(className + SUFFIX)
                     .addSuperinterface(ClassName(packageName, className))
                 clazz?.addInitializerBlock(initBuilder.build())
                 serializationAdapter = try {
-                    element.getAnnotation(FuelInterface::class.java)?.value?.qualifiedName
+                    elm.getAnnotation(FuelInterface::class.java)?.value?.qualifiedName
                 } catch (e: MirroredTypeException) {
                     (e.typeMirror.asTypeName() as ClassName).canonicalName
                 }

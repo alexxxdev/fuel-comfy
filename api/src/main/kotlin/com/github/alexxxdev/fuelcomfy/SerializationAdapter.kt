@@ -32,43 +32,43 @@ interface SerializationAdapter {
     )
 
     fun serializationPrimitive(
-        ParameterizedTypeName: TypeName,
+        typeName: TypeName,
         name: String,
         statement: (String, Array<Any>) -> Unit,
         import: (ClassName) -> Unit
     )
     fun serializationString(
-        ParameterizedTypeName: TypeName,
+        typeName: TypeName,
         name: String,
         statement: (String, Array<Any>) -> Unit,
         import: (ClassName) -> Unit
     )
     fun serializationClass(
-        ParameterizedTypeName: TypeName,
+        typeName: TypeName,
         name: String,
         statement: (String, Array<Any>) -> Unit,
         import: (ClassName) -> Unit
     )
     fun serializationArray(
-        ParameterizedTypeName: ParameterizedTypeName,
+        typeName: ParameterizedTypeName,
         name: String,
         statement: (String, Array<Any>) -> Unit,
         import: (ClassName) -> Unit
     )
     fun serializationList(
-        ParameterizedTypeName: ParameterizedTypeName,
+        typeName: ParameterizedTypeName,
         name: String,
         statement: (String, Array<Any>) -> Unit,
         import: (ClassName) -> Unit
     )
     fun serializationSet(
-        ParameterizedTypeName: ParameterizedTypeName,
+        typeName: ParameterizedTypeName,
         name: String,
         statement: (String, Array<Any>) -> Unit,
         import: (ClassName) -> Unit
     )
     fun serializationMap(
-        ParameterizedTypeName: ParameterizedTypeName,
+        typeName: ParameterizedTypeName,
         name: String,
         statement: (String, Array<Any>) -> Unit,
         import: (ClassName) -> Unit

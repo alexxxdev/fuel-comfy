@@ -29,7 +29,6 @@ class HeaderBuilder(private val element: ExecutableElement, private val messager
                             .forEach { entry ->
                                 val p = """${'$'}{${entry.key}}"""
                                 value = value.replace(result.value, p)
-                                return@forEach
                             }
                     }
                     block("\t.header(%S, %P)", arrayOf(header.name, value))

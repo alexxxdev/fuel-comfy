@@ -51,26 +51,26 @@ class GsonAdapter : SerializationAdapter {
     }
 
     override fun serializationClass(typeName: TypeName, name: String, statement: (String, Array<Any>) -> Unit, import: (ClassName) -> Unit) {
-        serialization(typeName, name, statement, import)
+        serialization(typeName, name, statement)
     }
 
     override fun serializationArray(typeName: ParameterizedTypeName, name: String, statement: (String, Array<Any>) -> Unit, import: (ClassName) -> Unit) {
-        serialization(typeName, name, statement, import)
+        serialization(typeName, name, statement)
     }
 
     override fun serializationList(typeName: ParameterizedTypeName, name: String, statement: (String, Array<Any>) -> Unit, import: (ClassName) -> Unit) {
-        serialization(typeName, name, statement, import)
+        serialization(typeName, name, statement)
     }
 
     override fun serializationSet(typeName: ParameterizedTypeName, name: String, statement: (String, Array<Any>) -> Unit, import: (ClassName) -> Unit) {
-        serialization(typeName, name, statement, import)
+        serialization(typeName, name, statement)
     }
 
     override fun serializationMap(typeName: ParameterizedTypeName, name: String, statement: (String, Array<Any>) -> Unit, import: (ClassName) -> Unit) {
-        serialization(typeName, name, statement, import)
+        serialization(typeName, name, statement)
     }
 
-    private fun serialization(typeName: TypeName, name: String, statement: (String, Array<Any>) -> Unit, import: (ClassName) -> Unit) {
+    private fun serialization(typeName: TypeName, name: String, statement: (String, Array<Any>) -> Unit) {
         statement(
             "\t\t%T().toJson(%N, object : %T<%T>() {}.type)",
             arrayOf(

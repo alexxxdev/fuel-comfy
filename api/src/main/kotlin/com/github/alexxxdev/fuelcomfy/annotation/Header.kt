@@ -4,6 +4,7 @@ package com.github.alexxxdev.fuelcomfy.annotation
  * Expands headers
  */
 
+@Suppress("DEPRECATED_JAVA_ANNOTATION")
 @Retention(AnnotationRetention.SOURCE)
 @Target(AnnotationTarget.CLASS, AnnotationTarget.FUNCTION)
 @java.lang.annotation.Repeatable(Headers::class)
