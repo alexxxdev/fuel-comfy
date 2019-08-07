@@ -8,6 +8,8 @@
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/f3522966b0364e579c71fbed7b04b36a)](https://www.codacy.com/app/alexxxdev/fuel-comfy?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=alexxxdev/fuel-comfy&amp;utm_campaign=Badge_Grade)
 [![codebeat badge](https://codebeat.co/badges/f5c150b2-7fd5-4317-980a-d5369f8a39c7)](https://codebeat.co/projects/github-com-alexxxdev-fuel-comfy-master)
 [![Hits-of-Code](https://hitsofcode.com/github/alexxxdev/fuel-comfy)](https://hitsofcode.com/view/github/alexxxdev/fuel-comfy)  
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=alexxxdev_fuel-comfy&metric=alert_status)](https://sonarcloud.io/dashboard?id=alexxxdev_fuel-comfy)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=alexxxdev_fuel-comfy&metric=coverage)](https://sonarcloud.io/dashboard?id=alexxxdev_fuel-comfy)  
 [![Kotlin](https://img.shields.io/badge/Kotlin-1.3.41-blue.svg)](https://kotlinlang.org)
 [![Fuel](https://img.shields.io/badge/Fuel-2.2.0-blue.svg)](https://github.com/kittinunf/fuel)
 
