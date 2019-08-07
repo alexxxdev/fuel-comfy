@@ -2,6 +2,11 @@ dist: trusty
 language: java
 jdk:
   - openjdk8
+addons:
+  sonarcloud:
+    organization: "alexxxdev"
+    token:
+      secure: "5cf6a0061b8b32afe0a514b53f9ac790268b424f"      
 before_install:
   - sudo apt-get install jq
   - wget -O ~/codacy-coverage-reporter-assembly-latest.jar $(curl https://api.github.com/repos/codacy/codacy-coverage-reporter/releases/latest | jq -r '.assets[0].browser_download_url')
@@ -10,6 +15,7 @@ before_script:
 script:
   - ./gradlew check
   - ./gradlew jacocoTestReport
+  - ./gradlew sonarqube
 after_success:
   - bash <(curl -s https://codecov.io/bash)
   - java -jar ~/codacy-coverage-reporter-assembly-latest.jar report -l Java -r processor/build/reports/jacoco/test/jacocoTestReport.xml
