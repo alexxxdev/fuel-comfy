@@ -32,6 +32,7 @@ buildscript {
 
 plugins {
     id "io.gitlab.arturbosch.detekt" version '1.0.0-RC14'
+    id "org.sonarqube" version "2.7"
 }
 
 apply plugin: 'io.gitlab.arturbosch.detekt'
@@ -88,4 +89,10 @@ detekt {
 dependencies {
     detekt "io.gitlab.arturbosch.detekt:detekt-formatting:$detektGradlePluginVersion"
     detekt "io.gitlab.arturbosch.detekt:detekt-cli:$detektGradlePluginVersion"
+}
+
+sonarqube {
+  properties {
+    sonar.projectKey: alexxxdev_fuel-comfy
+  }
 }
