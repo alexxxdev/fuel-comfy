@@ -93,6 +93,6 @@ dependencies {
 
 sonarqube {
   properties {
-    sonar.projectKey: alexxxdev_fuel-comfy
+    property "sonar.projectKey", "alexxxdev_fuel-comfy"
   }
 }
