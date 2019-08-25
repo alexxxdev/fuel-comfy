@@ -11,7 +11,7 @@
 [![CodeFactor](https://www.codefactor.io/repository/github/alexxxdev/fuel-comfy/badge)](https://www.codefactor.io/repository/github/alexxxdev/fuel-comfy)  
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=alexxxdev_fuel-comfy&metric=alert_status)](https://sonarcloud.io/dashboard?id=alexxxdev_fuel-comfy)
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=alexxxdev_fuel-comfy&metric=coverage)](https://sonarcloud.io/dashboard?id=alexxxdev_fuel-comfy)  
-[![Kotlin](https://img.shields.io/badge/Kotlin-1.3.41-blue.svg)](https://kotlinlang.org)
+[![Kotlin](https://img.shields.io/badge/Kotlin-1.3.50-blue.svg)](https://kotlinlang.org)
 [![Fuel](https://img.shields.io/badge/Fuel-2.2.0-blue.svg)](https://github.com/kittinunf/fuel)
 
 More comfortable use of [Fuel](https://github.com/kittinunf/fuel) as in [Retrofit](https://square.github.io/retrofit/) or [Feign](https://github.com/OpenFeign/feign) for Kotlin/Android
