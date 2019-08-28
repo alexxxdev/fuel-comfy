@@ -13,5 +13,5 @@ jobs:
       uses: MrRamych/gradle-actions/openjdk-8@2.1
       with: 
         args: '"
-        gradle build
+        build
         "'
