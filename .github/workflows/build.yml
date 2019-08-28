@@ -9,14 +9,12 @@ jobs:
     
     steps:
     - uses: actions/checkout@v1      
-    - name: Build
+    - name: Build & Generate Jacoco Report
       uses: MrRamych/gradle-actions/openjdk-8@2.1
       with: 
         args: '"
-        build
+        build jacocoTestReport
         "'
-    - name: jacocoTestReport
-      run: ./gradlew jacocoTestReport
     - uses: codecov/codecov-action@v1.0.2
       with:
         token: ${{secrets.CODECOV_TOKEN}}
