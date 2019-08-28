@@ -15,3 +15,13 @@ jobs:
         args: '"
         build
         "'
+    - name: jacocoTestReport
+      uses: MrRamych/gradle-actions/openjdk-8@2.1
+      with: 
+        args: '"
+        jacocoTestReport
+        "'
+    - uses: codecov/codecov-action@v1.0.2
+      with:
+        token: ${{secrets.CODECOV_TOKEN}}
+        file: ./processor/build/reports/jacoco/test/jacocoTestReport.xml
