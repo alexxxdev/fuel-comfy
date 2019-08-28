@@ -8,12 +8,9 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-    - uses: actions/checkout@v1
-    - name: checkout submodule
-      run: git submodule sync --recursive && git submodule update --init --recursive
-      
+    - uses: actions/checkout@v1      
     - name: Android build action
-      uses: xdtianyu/actions-android-ci@v1.0.0
+      uses: MrRamych/gradle-actions/openjdk-8@2.1
       with: 
         args: '"
         ./gradlew build
