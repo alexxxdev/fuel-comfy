@@ -9,7 +9,7 @@ jobs:
     
     steps:
     - uses: actions/checkout@v1      
-    - name: Android build action
+    - name: Build
       uses: MrRamych/gradle-actions/openjdk-8@2.1
       with: 
         args: '"
