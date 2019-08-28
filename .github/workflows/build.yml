@@ -10,4 +10,5 @@ jobs:
     steps:
     - name: Android build action
     - uses: xdtianyu/actions-android-ci@v1.0.0
+    - name: Android build
       run: ./gradlew build
