@@ -57,15 +57,16 @@ test {
         includeEngines 'spek2'
     }
     jacoco {
-        append = false
         destinationFile = file("$buildDir/jacoco/junitPlatformTest.exec")
         includeNoLocationClasses = true
     }
     jacocoTestReport {
         group = "Reporting"
         description = "Generate Jacoco coverage report."
-        classDirectories = fileTree(
+        getClassDirectories().setFrom(
+            fileTree(
                 dir: "$buildDir/classes/kotlin/main",
+            )
         )
         def coverageSourceDirs = [
                 "src/main/kotlin",
@@ -73,10 +74,15 @@ test {
                 "../processor-gson/src/main/kotlin",
                 "../api/src/main/kotlin"
         ]
-        additionalClassDirs = files(["../processor-coroutines/build/classes/kotlin/main","../processor-gson/build/classes/kotlin/main","../api/build/classes/kotlin/main"])
-        additionalSourceDirs = files(coverageSourceDirs)
-        sourceDirectories = files(coverageSourceDirs)
-        executionData = files("$buildDir/jacoco/junitPlatformTest.exec")
+        getAdditionalClassDirs().from(
+            files(["../processor-coroutines/build/classes/kotlin/main","../processor-gson/build/classes/kotlin/main","../api/build/classes/kotlin/main"])
+        )
+        getAdditionalSourceDirs().from(
+            files(coverageSourceDirs)
+        )
+        getExecutionData().from(
+            files("$buildDir/jacoco/junitPlatformTest.exec")
+        )
         reports {
             xml.enabled = true
             html.enabled = true
