@@ -8,7 +8,7 @@ buildscript {
     ext.kotlinpoetVersion = '1.4.4'
     ext.fuelVersion = '2.2.1'
     ext.spekVersion = '2.0.11'
-    ext.okio = '2.2.2'
+    ext.okio = '2.6.0'
     ext.mockwebserver = '4.7.2'
 
     repositories {
