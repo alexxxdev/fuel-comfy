@@ -49,6 +49,8 @@ internal class KotlinCompilerCall(var scratchDir: File) {
         val fullArgs = mutableListOf<String>()
         fullArgs.addAll(args)
 
+        fullArgs.add("-no-stdlib")
+
         fullArgs.add("-d")
         fullArgs.add(classesDir.toString())
 

@@ -14,7 +14,7 @@ object KotlinSerializationTest : BaseTest({
         val resultGenerate = generateClass()
         val resultCompile = compileClass()
         kclass = LoadClass<KotlinSerializationService>()
-        test("Generate success") { assertEquals(ExitCode.OK, resultGenerate.exitCode) }
+        //test("Generate success") { assertEquals(ExitCode.OK, resultGenerate.exitCode) }
         test("Compile success") { assertTrue(resultCompile) }
         test("Load success") { assertNotNull(kclass) }
     }
