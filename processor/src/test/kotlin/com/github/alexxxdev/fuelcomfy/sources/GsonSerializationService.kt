@@ -12,9 +12,6 @@ import com.github.kittinunf.result.Result
 interface GsonSerializationService {
 
     @Post("/post")
-    fun postAnyFun(@Body user: Any): Result<Any, Exception>
-
-    @Post("/post")
     fun postIntFun(@Body user: Int): Result<Int, Exception>
 
     @Post("/post")

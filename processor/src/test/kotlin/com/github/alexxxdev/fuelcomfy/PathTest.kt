@@ -13,7 +13,7 @@ import kotlin.test.assertNotNull
 import kotlin.test.assertTrue
 
 object PathTest : BaseTest({
-    val port = 10005
+    val port = 10101
     var kclass: GitHubService? = null
     FuelManager.instance.basePath = "http://localhost:$port/"
 
