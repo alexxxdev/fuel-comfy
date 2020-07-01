@@ -8,8 +8,7 @@ import javax.annotation.processing.Processor
 abstract class BaseTest(root: Root.() -> Unit) : Spek(root) {
 
     companion object {
-        //val root = File("./processor")
-        val root = File(".")
+        val root = File(System.getProperty("user.dir"))
 
         fun generateClass(): KotlinCompilerResult {
             val call = KotlinCompilerCall(root)

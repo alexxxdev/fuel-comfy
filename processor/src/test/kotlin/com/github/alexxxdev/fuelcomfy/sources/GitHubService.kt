@@ -17,33 +17,36 @@ import com.github.kittinunf.result.Result
 @Header("Cache-Control", "no-cache")
 interface GitHubService {
     @Get("/get")
-    fun getFun(): Result<Any, Exception>
+    fun getFunAny(): Result<Any, Exception>
+
+    @Get("/get")
+    fun getFun(): Result<String, Exception>
 
     @Post("/post")
-    fun postFun(): Result<Any, Exception>
+    fun postFun(): Result<String, Exception>
 
     @Put("/put")
-    fun putFun(): Result<Any, Exception>
+    fun putFun(): Result<String, Exception>
 
     @Delete("/delete")
-    fun deleteFun(): Result<Any, Exception>
+    fun deleteFun(): Result<String, Exception>
 
     @Patch("/patch")
-    fun patchFun(): Result<Any, Exception>
+    fun patchFun(): Result<String, Exception>
 
     @Head("/head")
-    fun headFun(): Result<Any, Exception>
+    fun headFun(): Result<String, Exception>
 
     @Get("/get")
     @Header("Content-Type", "application/{type}")
     @Header("Accept-Encoding", "{encoding}")
-    fun getFunWithParamsHeaders(@Param("type") type: String, @Param("encoding") encoding: String): Result<Any, Exception>
+    fun getFunWithParamsHeaders(@Param("type") type: String, @Param("encoding") encoding: String): Result<String, Exception>
 
     @Post("/post")
     @Header("Content-Type", "application/json")
     @Header("Accept-Encoding", "gzip")
-    fun postFunWithHeaders(): Result<Any, Exception>
+    fun postFunWithHeaders(): Result<String, Exception>
 
     @Get("/get/{user}/{resource}")
-    fun getFunWithParams(@Param("user") user: String, @Param("resource") resource: String): Result<Any, Exception>
+    fun getFunWithParams(@Param("user") user: String, @Param("resource") resource: String): Result<String, Exception>
 }

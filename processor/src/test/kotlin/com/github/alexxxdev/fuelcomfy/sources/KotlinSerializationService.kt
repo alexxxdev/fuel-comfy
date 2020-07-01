@@ -11,8 +11,8 @@ import com.github.kittinunf.result.Result
 @FuelInterface(KotlinSerializationAdapter::class)
 interface KotlinSerializationService {
 
-    @Post("/post")
-    fun postAnyFun(@Body user: Any): Result<Any, Exception>
+    //@Post("/post")
+    //fun postAnyFun(@Body user: Any): Result<Any, Exception>
 
     @Post("/post")
     fun postIntFun(@Body user: Int): Result<Int, Exception>

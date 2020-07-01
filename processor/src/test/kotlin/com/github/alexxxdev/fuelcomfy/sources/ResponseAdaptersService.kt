@@ -14,8 +14,6 @@ import com.github.kittinunf.result.Result
 
 @FuelInterface(KotlinSerializationAdapter::class)
 interface ResponseAdaptersService {
-    @Get("/get")
-    suspend fun getFunSuspend(): Result<Any, Exception>
 
     @Get("/get")
     suspend fun getUserFunSuspend(): Result<User, Exception>
@@ -42,9 +40,6 @@ interface ResponseAdaptersService {
     suspend fun getUserMapDataFunSuspend(): Result<Data<Map<Int, User>>, Exception>
 
     @Get("/get")
-    fun getFun(): Result<Any, Exception>
-
-    @Get("/get")
     fun getUserFun(): Result<User, Exception>
 
     @Get("/get")
@@ -67,19 +62,4 @@ interface ResponseAdaptersService {
 
     @Get("/get")
     fun getUserMapDataFun(): Result<Data<Map<Int, User>>, Exception>
-
-    @Post("/post")
-    suspend fun postFun(): Result<Any, Exception>
-
-    @Put("/put")
-    suspend fun putFun(): Result<Any, Exception>
-
-    @Delete("/delete")
-    suspend fun deleteFun(): Result<Any, Exception>
-
-    @Patch("/patch")
-    suspend fun patchFun(): Result<Any, Exception>
-
-    @Head("/head")
-    suspend fun headFun(): Result<Any, Exception>
 }
