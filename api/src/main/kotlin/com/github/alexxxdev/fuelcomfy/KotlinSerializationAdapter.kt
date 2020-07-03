@@ -16,7 +16,11 @@ class KotlinSerializationAdapter : SerializationAdapter {
     private val serializerClassName = ClassName(BUILTINS, "serializer")
     private val jsonClassName = ClassName("kotlinx.serialization.json", "Json")
 
-    override fun deserializationAnyClass(returnType: ParameterizedTypeName, statement: (String, Array<Any>) -> Unit, import: (ClassName) -> Unit) = Unit
+    override fun deserializationAnyClass(
+        returnType: ParameterizedTypeName,
+        statement: (String, Array<Any>) -> Unit,
+        import: (ClassName) -> Unit
+    ) = Unit
 
     override fun deserializationClass(
         returnType: ParameterizedTypeName,
@@ -53,7 +57,11 @@ class KotlinSerializationAdapter : SerializationAdapter {
         )
     }
 
-    override fun deserializationSet(returnType: ParameterizedTypeName, statement: (String, Array<Any>) -> Unit, import: (ClassName) -> Unit) {
+    override fun deserializationSet(
+        returnType: ParameterizedTypeName,
+        statement: (String, Array<Any>) -> Unit,
+        import: (ClassName) -> Unit
+    ) {
         import(setClassName)
         import(jsonClassName)
         val parameterizedType = returnType.typeArguments[0] as ParameterizedTypeName
@@ -68,7 +76,11 @@ class KotlinSerializationAdapter : SerializationAdapter {
         )
     }
 
-    override fun deserializationMap(returnType: ParameterizedTypeName, statement: (String, Array<Any>) -> Unit, import: (ClassName) -> Unit) {
+    override fun deserializationMap(
+        returnType: ParameterizedTypeName,
+        statement: (String, Array<Any>) -> Unit,
+        import: (ClassName) -> Unit
+    ) {
         import(mapSerializerClassName)
         import(serializerClassName)
         import(jsonClassName)

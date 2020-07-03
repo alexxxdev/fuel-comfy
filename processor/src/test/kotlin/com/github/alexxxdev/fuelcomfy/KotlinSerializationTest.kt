@@ -4,7 +4,6 @@ import com.github.alexxxdev.fuelcomfy.common.BaseTest
 import com.github.alexxxdev.fuelcomfy.data.User
 import com.github.alexxxdev.fuelcomfy.sources.KotlinSerializationService
 import com.github.kittinunf.fuel.core.FuelManager
-import com.github.kittinunf.fuel.core.Method
 import com.github.kittinunf.result.Result
 import kotlinx.serialization.builtins.MapSerializer
 import kotlinx.serialization.builtins.serializer
@@ -14,7 +13,6 @@ import okhttp3.mockwebserver.Dispatcher
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
 import okhttp3.mockwebserver.RecordedRequest
-import org.jetbrains.kotlin.cli.common.ExitCode
 import kotlin.test.assertEquals
 import kotlin.test.assertNotNull
 import kotlin.test.assertTrue
@@ -27,7 +25,7 @@ object KotlinSerializationTest : BaseTest({
         val resultGenerate = generateClass()
         val resultCompile = compileClass()
         kclass = LoadClass<KotlinSerializationService>()
-        //test("Generate success") { assertEquals(ExitCode.OK, resultGenerate.exitCode) }
+        // test("Generate success") { assertEquals(ExitCode.OK, resultGenerate.exitCode) }
         test("Compile success") { assertTrue(resultCompile) }
         test("Load success") { assertNotNull(kclass) }
     }
@@ -35,7 +33,7 @@ object KotlinSerializationTest : BaseTest({
         var response: Result<String, Exception>? = null
         val server = MockWebServer()
         beforeGroup {
-            server.dispatcher = object :Dispatcher(){
+            server.dispatcher = object : Dispatcher() {
                 override fun dispatch(request: RecordedRequest): MockResponse {
                     return MockResponse()
                         .setResponseCode(200)
@@ -63,7 +61,7 @@ object KotlinSerializationTest : BaseTest({
         val server = MockWebServer()
         val userMap = mapOf(1 to User(1), 2 to User(2))
         beforeGroup {
-            server.dispatcher = object :Dispatcher(){
+            server.dispatcher = object : Dispatcher() {
                 override fun dispatch(request: RecordedRequest): MockResponse {
                     return MockResponse()
                         .setResponseCode(200)

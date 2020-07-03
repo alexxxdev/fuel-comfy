@@ -25,15 +25,42 @@ h3 {
 .location {
   color: #690505;
   font-family: monospace;
+  display: block;
 }
 .message {
   font-size: 0.8em;
   color: #444444;
+  display: block;
+  margin-top: 1pt;
 }
 .rule-container {
   border: 0.1em dashed #dddddd;
   padding: 0.1em;
   line-height: 1.5em;
+  margin-bottom: 8px;
+  margin-top: 8px;
+}
+pre {
+  border: 1px solid #e0e0e0;
+  overflow: scroll;
+}
+.lineno {
+  color: #999999;
+  background-color: #f0f0f0;
+}
+.error {
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH4AwCFR4T/3uLMgAAADxJREFUCNdNyLERQEAABMCjL4lQwIzcjErpguAL+C9AvgKJDbeD/PRpLdm35Hm+MU+cB+tCKaJW4L4YBy+CAiLJrFs9mgAAAABJRU5ErkJggg==) bottom repeat-x;
+}
+.exception {
+  color: #b60808;
+  display: inline-block;
+  background-color: #ecdada;
+  border-color: #b60808;
+  border-radius: 10px;
+  border: solid 2px;
+  padding-left: 16px;
+  padding-right: 16px;
+  margin-bottom: 16px;
 }
 </style>
 </head>
@@ -43,307 +70,158 @@ h3 {
 
 <h2>Metrics</h2>
 
-<ul>
-<li>
-number of kt files: 31
-</li>
-<li>
-number of packages: 4
-</li>
-<li>
-number of classes: 30
-</li>
-<li>
-number of functions: 74
-</li>
-<li>
-number of properties: 92
-</li>
-</ul>
+<div>
+  <ul>
+    <li>166 number of properties</li>
+    <li>158 number of functions</li>
+    <li>41 number of classes</li>
+    <li>7 number of packages</li>
+    <li>48 number of kt files</li>
+  </ul>
+</div>
+
+
+<h2>Complexity Report</h2>
+
+<div>
+  <ul>
+    <li>2,541 lines of code (loc)</li>
+    <li>2,128 source lines of code (sloc)</li>
+    <li>1,372 logical lines of code (lloc)</li>
+    <li>74 comment lines of code (cloc)</li>
+    <li>279 cyclomatic complexity (mcc)</li>
+    <li>97 cognitive complexity</li>
+    <li>9 number of total code smells</li>
+    <li>3% comment source ratio</li>
+    <li>203 mcc per 1,000 lloc</li>
+    <li>6 code smells per 1,000 lloc</li>
+  </ul>
+</div>
+
 
 <h2>Findings</h2>
-<h3>complexity</h3>
-<div class="rule-container">
-<span class="rule">
-TooManyFunctions
-</span>
-<span class="description">
-Too many functions inside a/an file/class/object/interface always indicate a violation of the single responsibility principle. Maybe the file/class/object/interface wants to manage too many things at once. Extract functionality which clearly belongs together.
-</span>
+<div>Total: 9
+  <h3>complexity: 7</h3>
+  <details id="ComplexMethod" open="open">
+    <summary class="rule-container"><span class="rule">ComplexMethod: 2 </span><span class="description">Prefer splitting up complex methods into smaller, easier to understand methods.</span></summary>
+    <ul>
+      <li><span class="location">/home/alexxxdev/projects/fuel-comfy/processor/src/main/kotlin/com/github/alexxxdev/fuelcomfy/builder/BodyBuilder.kt:20:9</span><span class="message">The function build appears to be too complex (19). Defined complexity threshold for methods is set to '15'</span>
+        <pre><code><span class="lineno">  17 </span>        return this
+<span class="lineno">  18 </span>    }
+<span class="lineno">  19 </span>
+<span class="lineno">  20 </span>    fun <span class="error">build</span>(statement: (String, Array&lt;Any&gt;) -&gt; Unit, import: (ClassName) -&gt; Unit) {
+<span class="lineno">  21 </span>        parameters.filterValues { it.annotation is Body }.forEach { entry -&gt;
+<span class="lineno">  22 </span>            val typeName = entry.value.parameterSpec.type
+<span class="lineno">  23 </span>            val name = entry.value.parameterSpec.name
+</code></pre>
+      </li>
+      <li><span class="location">/home/alexxxdev/projects/fuel-comfy/processor/src/main/kotlin/com/github/alexxxdev/fuelcomfy/builder/FunSpecBodyBuilder.kt:69:17</span><span class="message">The function buildReturn appears to be too complex (17). Defined complexity threshold for methods is set to '15'</span>
+        <pre><code><span class="lineno">  66 </span>        }
+<span class="lineno">  67 </span>    }
+<span class="lineno">  68 </span>
+<span class="lineno">  69 </span>    private fun <span class="error">buildReturn</span>(
+<span class="lineno">  70 </span>        statement: (String, Array&lt;Any&gt;) -&gt; Unit,
+<span class="lineno">  71 </span>        import: (ClassName) -&gt; Unit
+<span class="lineno">  72 </span>    ) {
+</code></pre>
+      </li>
+    </ul>
+  </details>
+  <details id="LongMethod" open="open">
+    <summary class="rule-container"><span class="rule">LongMethod: 1 </span><span class="description">One method should have one responsibility. Long methods tend to handle many things at once. Prefer smaller methods to make them easier to understand.</span></summary>
+    <ul>
+      <li><span class="location">/home/alexxxdev/projects/fuel-comfy/processor/src/main/kotlin/com/github/alexxxdev/fuelcomfy/builder/FunSpecBodyBuilder.kt:69:17</span><span class="message">The function buildReturn is too long (73). The maximum length is 60.</span>
+        <pre><code><span class="lineno">  66 </span>        }
+<span class="lineno">  67 </span>    }
+<span class="lineno">  68 </span>
+<span class="lineno">  69 </span>    private fun <span class="error">buildReturn</span>(
+<span class="lineno">  70 </span>        statement: (String, Array&lt;Any&gt;) -&gt; Unit,
+<span class="lineno">  71 </span>        import: (ClassName) -&gt; Unit
+<span class="lineno">  72 </span>    ) {
+</code></pre>
+      </li>
+    </ul>
+  </details>
+  <details id="NestedBlockDepth" open="open">
+    <summary class="rule-container"><span class="rule">NestedBlockDepth: 1 </span><span class="description">Excessive nesting leads to hidden complexity. Prefer extracting code to make it easier to understand.</span></summary>
+    <ul>
+      <li><span class="location">/home/alexxxdev/projects/fuel-comfy/processor/src/main/kotlin/com/github/alexxxdev/fuelcomfy/builder/HeaderBuilder.kt:16:9</span><span class="message">Function build is nested too deeply.</span>
+        <pre><code><span class="lineno">  13 </span>        return this
+<span class="lineno">  14 </span>    }
+<span class="lineno">  15 </span>
+<span class="lineno">  16 </span>    fun <span class="error">build</span>(block: (String, Array&lt;Any&gt;) -&gt; Unit) {
+<span class="lineno">  17 </span>        val annotationsByType = element.getAnnotationsByType(Header::class.java)
+<span class="lineno">  18 </span>        if (annotationsByType.isNotEmpty()) {
+<span class="lineno">  19 </span>            annotationsByType.reversedArray().forEach { header -&gt;
+</code></pre>
+      </li>
+    </ul>
+  </details>
+  <details id="TooManyFunctions" open="open">
+    <summary class="rule-container"><span class="rule">TooManyFunctions: 3 </span><span class="description">Too many functions inside a/an file/class/object/interface always indicate a violation of the single responsibility principle. Maybe the file/class/object/interface wants to manage too many things at once. Extract functionality which clearly belongs together.</span></summary>
+    <ul>
+      <li><span class="location">/home/alexxxdev/projects/fuel-comfy/api/src/main/kotlin/com/github/alexxxdev/fuelcomfy/KotlinSerializationAdapter.kt:11:7</span><span class="message">Class 'KotlinSerializationAdapter' with '16' functions detected. Defined threshold inside classes is set to '11'</span>
+        <pre><code><span class="lineno">   8 </span>
+<span class="lineno">   9 </span>const val BUILTINS = &quot;kotlinx.serialization.builtins&quot;
+<span class="lineno">  10 </span>
+<span class="lineno">  11 </span>class <span class="error">KotlinSerializationAdapter</span> : SerializationAdapter {
+<span class="lineno">  12 </span>    private val kotlinxDeserializerOf = ClassName(&quot;com.github.kittinunf.fuel.serialization&quot;, &quot;kotlinxDeserializerOf&quot;)
+<span class="lineno">  13 </span>    private val listClassName = ClassName(BUILTINS, &quot;list&quot;)
+<span class="lineno">  14 </span>    private val setClassName = ClassName(BUILTINS, &quot;set&quot;)
+</code></pre>
+      </li>
+      <li><span class="location">/home/alexxxdev/projects/fuel-comfy/api/src/main/kotlin/com/github/alexxxdev/fuelcomfy/SerializationAdapter.kt:7:11</span><span class="message">Interface 'SerializationAdapter' with '16' functions detected. Defined threshold inside interfaces is set to '11'</span>
+        <pre><code><span class="lineno">   4 </span>import com.squareup.kotlinpoet.ParameterizedTypeName
+<span class="lineno">   5 </span>import com.squareup.kotlinpoet.TypeName
+<span class="lineno">   6 </span>
+<span class="lineno">   7 </span>interface <span class="error">SerializationAdapter</span> {
+<span class="lineno">   8 </span>    fun deserializationAnyClass(
+<span class="lineno">   9 </span>        returnType: ParameterizedTypeName,
+<span class="lineno">  10 </span>        statement: (String, Array&lt;Any&gt;) -&gt; Unit,
+</code></pre>
+      </li>
+      <li><span class="location">/home/alexxxdev/projects/fuel-comfy/processor-gson/src/main/kotlin/com/github/alexxxdev/fuelcomfy/GsonAdapter.kt:7:7</span><span class="message">Class 'GsonAdapter' with '18' functions detected. Defined threshold inside classes is set to '11'</span>
+        <pre><code><span class="lineno">   4 </span>import com.squareup.kotlinpoet.ParameterizedTypeName
+<span class="lineno">   5 </span>import com.squareup.kotlinpoet.TypeName
+<span class="lineno">   6 </span>
+<span class="lineno">   7 </span>class <span class="error">GsonAdapter</span> : SerializationAdapter {
+<span class="lineno">   8 </span>    private val gsonDeserializerClassName = ClassName(&quot;com.github.kittinunf.fuel.gson&quot;, &quot;gsonDeserializer&quot;)
+<span class="lineno">   9 </span>    private val jsonClassName = ClassName(&quot;kotlinx.serialization.json&quot;, &quot;Json&quot;)
+<span class="lineno">  10 </span>
+</code></pre>
+      </li>
+    </ul>
+  </details>
+  <h3>performance: 2</h3>
+  <details id="SpreadOperator" open="open">
+    <summary class="rule-container"><span class="rule">SpreadOperator: 2 </span><span class="description">In most cases using a spread operator causes a full copy of the array to be created before calling a method which has a very high performance penalty.</span></summary>
+    <ul>
+      <li><span class="location">/home/alexxxdev/projects/fuel-comfy/api/src/main/kotlin/com/github/alexxxdev/fuelcomfy/PoetExt.kt:11:62</span><span class="message">In most cases using a spread operator causes a full copy of the array to be created before calling a method which has a very high performance penalty.</span>
+        <pre><code><span class="lineno">   8 </span>import kotlin.reflect.jvm.internal.impl.name.FqName
+<span class="lineno">   9 </span>
+<span class="lineno">  10 </span>fun TypeName.javaToKotlinType(): TypeName = if (this is ParameterizedTypeName) {
+<span class="lineno">  11 </span>    (rawType.javaToKotlinType() as ClassName).parameterizedBy<span class="error">(</span>
+<span class="lineno">  12 </span><span class="error">        *typeArguments.map { it.javaToKotlinType() }.toTypedArray()</span>
+<span class="lineno">  13 </span><span class="error">    )</span>
+<span class="lineno">  14 </span>} else {
+</code></pre>
+      </li>
+      <li><span class="location">/home/alexxxdev/projects/fuel-comfy/processor/src/main/kotlin/com/github/alexxxdev/fuelcomfy/builder/FunSpecBuilder.kt:66:34</span><span class="message">In most cases using a spread operator causes a full copy of the array to be created before calling a method which has a very high performance penalty.</span>
+        <pre><code><span class="lineno">  63 </span>            returnType?.let { this.returnType = it }
+<span class="lineno">  64 </span>
+<span class="lineno">  65 </span>            build({ str, params -&gt;
+<span class="lineno">  66 </span>                func.addStatement<span class="error">(str, *params)</span>
+<span class="lineno">  67 </span>            }, { importClassName -&gt;
+<span class="lineno">  68 </span>                import(importClassName)
+<span class="lineno">  69 </span>            })
+</code></pre>
+      </li>
+    </ul>
+  </details>
 </div>
-<ul>
-<li>
-<span class="location">
-/home/alexxxdev/Android/projects/fuel-comfy/api/src/main/kotlin/com/github/alexxxdev/fuelcomfy/SerializationAdapter.kt:7:1
-</span>
-<br />
-<span class="message">
-Interface 'SerializationAdapter' with '16' functions detected. Defined threshold inside interfaces is set to '11'
-</span>
-</li>
-<li>
-<span class="location">
-/home/alexxxdev/Android/projects/fuel-comfy/processor/src/main/kotlin/com/github/alexxxdev/fuelcomfy/KotlinSerializationAdapter.kt:9:1
-</span>
-<br />
-<span class="message">
-Class 'KotlinSerializationAdapter' with '16' functions detected. Defined threshold inside classes is set to '11'
-</span>
-</li>
-</ul>
-<div class="rule-container">
-<span class="rule">
-NestedBlockDepth
-</span>
-<span class="description">
-Excessive nesting leads to hidden complexity. Prefer extracting code to make it easier to understand.
-</span>
-</div>
-<ul>
-<li>
-<span class="location">
-/home/alexxxdev/Android/projects/fuel-comfy/processor/src/main/kotlin/com/github/alexxxdev/fuelcomfy/builder/HeaderBuilder.kt:16:5
-</span>
-<br />
-<span class="message">
-Function build is nested too deeply.
-</span>
-</li>
-</ul>
-<div class="rule-container">
-<span class="rule">
-ComplexMethod
-</span>
-<span class="description">
-Prefer splitting up complex methods into smaller, easier to understand methods.
-</span>
-</div>
-<ul>
-<li>
-<span class="location">
-/home/alexxxdev/Android/projects/fuel-comfy/processor/src/main/kotlin/com/github/alexxxdev/fuelcomfy/builder/FunSpecBodyBuilder.kt:69:5
-</span>
-<br />
-<span class="message">
-The function buildReturn appears to be too complex.
-</span>
-</li>
-<li>
-<span class="location">
-/home/alexxxdev/Android/projects/fuel-comfy/processor/src/main/kotlin/com/github/alexxxdev/fuelcomfy/builder/BodyBuilder.kt:20:5
-</span>
-<br />
-<span class="message">
-The function build appears to be too complex.
-</span>
-</li>
-</ul>
-<h3>formatting</h3>
-<div class="rule-container">
-<span class="rule">
-MaximumLineLength
-</span>
-<span class="description">
-Reports lines with exceeded length
-</span>
-</div>
-<ul>
-<li>
-<span class="location">
-/home/alexxxdev/Android/projects/fuel-comfy/processor/src/main/kotlin/com/github/alexxxdev/fuelcomfy/KotlinSerializationAdapter.kt:55:6
-</span>
-<br />
-<span class="message">
-Exceeded max line length (140)
-</span>
-</li>
-<li>
-<span class="location">
-/home/alexxxdev/Android/projects/fuel-comfy/processor/src/main/kotlin/com/github/alexxxdev/fuelcomfy/KotlinSerializationAdapter.kt:70:6
-</span>
-<br />
-<span class="message">
-Exceeded max line length (140)
-</span>
-</li>
-<li>
-<span class="location">
-/home/alexxxdev/Android/projects/fuel-comfy/processor/src/main/kotlin/com/github/alexxxdev/fuelcomfy/builder/FunSpecBodyBuilder.kt:113:41
-</span>
-<br />
-<span class="message">
-Exceeded max line length (140)
-</span>
-</li>
-<li>
-<span class="location">
-/home/alexxxdev/Android/projects/fuel-comfy/processor/src/main/kotlin/com/github/alexxxdev/fuelcomfy/builder/FunSpecBodyBuilder.kt:163:123
-</span>
-<br />
-<span class="message">
-Exceeded max line length (140)
-</span>
-</li>
-</ul>
-<h3>naming</h3>
-<div class="rule-container">
-<span class="rule">
-FunctionParameterNaming
-</span>
-<span class="description">
-Function parameter names should follow the naming convention set in the projects configuration.
-</span>
-</div>
-<ul>
-<li>
-<span class="location">
-/home/alexxxdev/Android/projects/fuel-comfy/api/src/main/kotlin/com/github/alexxxdev/fuelcomfy/SerializationAdapter.kt:35:9
-</span>
-<br />
-<span class="message">
-Function parameter names should match the pattern: [a-z][A-Za-z0-9]*
-</span>
-</li>
-<li>
-<span class="location">
-/home/alexxxdev/Android/projects/fuel-comfy/api/src/main/kotlin/com/github/alexxxdev/fuelcomfy/SerializationAdapter.kt:41:9
-</span>
-<br />
-<span class="message">
-Function parameter names should match the pattern: [a-z][A-Za-z0-9]*
-</span>
-</li>
-<li>
-<span class="location">
-/home/alexxxdev/Android/projects/fuel-comfy/api/src/main/kotlin/com/github/alexxxdev/fuelcomfy/SerializationAdapter.kt:47:9
-</span>
-<br />
-<span class="message">
-Function parameter names should match the pattern: [a-z][A-Za-z0-9]*
-</span>
-</li>
-<li>
-<span class="location">
-/home/alexxxdev/Android/projects/fuel-comfy/api/src/main/kotlin/com/github/alexxxdev/fuelcomfy/SerializationAdapter.kt:53:9
-</span>
-<br />
-<span class="message">
-Function parameter names should match the pattern: [a-z][A-Za-z0-9]*
-</span>
-</li>
-<li>
-<span class="location">
-/home/alexxxdev/Android/projects/fuel-comfy/api/src/main/kotlin/com/github/alexxxdev/fuelcomfy/SerializationAdapter.kt:59:9
-</span>
-<br />
-<span class="message">
-Function parameter names should match the pattern: [a-z][A-Za-z0-9]*
-</span>
-</li>
-<li>
-<span class="location">
-/home/alexxxdev/Android/projects/fuel-comfy/api/src/main/kotlin/com/github/alexxxdev/fuelcomfy/SerializationAdapter.kt:65:9
-</span>
-<br />
-<span class="message">
-Function parameter names should match the pattern: [a-z][A-Za-z0-9]*
-</span>
-</li>
-<li>
-<span class="location">
-/home/alexxxdev/Android/projects/fuel-comfy/api/src/main/kotlin/com/github/alexxxdev/fuelcomfy/SerializationAdapter.kt:71:9
-</span>
-<br />
-<span class="message">
-Function parameter names should match the pattern: [a-z][A-Za-z0-9]*
-</span>
-</li>
-</ul>
-<h3>performance</h3>
-<div class="rule-container">
-<span class="rule">
-SpreadOperator
-</span>
-<span class="description">
-Using a spread operator causes a full copy of the array to be created before calling a method has a very high performance penalty.
-</span>
-</div>
-<ul>
-<li>
-<span class="location">
-/home/alexxxdev/Android/projects/fuel-comfy/api/src/main/kotlin/com/github/alexxxdev/fuelcomfy/PoetExt.kt:11:62
-</span>
-<br />
-<span class="message">
-Using a spread operator causes a full copy of the array to be created before calling a method has a very high performance penalty.
-</span>
-</li>
-<li>
-<span class="location">
-/home/alexxxdev/Android/projects/fuel-comfy/processor/src/main/kotlin/com/github/alexxxdev/fuelcomfy/builder/FunSpecBuilder.kt:62:34
-</span>
-<br />
-<span class="message">
-Using a spread operator causes a full copy of the array to be created before calling a method has a very high performance penalty.
-</span>
-</li>
-</ul>
-<h3>style</h3>
-<div class="rule-container">
-<span class="rule">
-MaxLineLength
-</span>
-<span class="description">
-Line detected that is longer than the defined maximum line length in the code style.
-</span>
-</div>
-<ul>
-<li>
-<span class="location">
-/home/alexxxdev/Android/projects/fuel-comfy/api/src/main/kotlin/com/github/alexxxdev/fuelcomfy/annotation/Param.kt:4:143
-</span>
-<br />
-<span class="message">
-Line detected that is longer than the defined maximum line length in the code style.
-</span>
-</li>
-<li>
-<span class="location">
-/home/alexxxdev/Android/projects/fuel-comfy/processor/src/main/kotlin/com/github/alexxxdev/fuelcomfy/KotlinSerializationAdapter.kt:57:5
-</span>
-<br />
-<span class="message">
-Line detected that is longer than the defined maximum line length in the code style.
-</span>
-</li>
-<li>
-<span class="location">
-/home/alexxxdev/Android/projects/fuel-comfy/processor/src/main/kotlin/com/github/alexxxdev/fuelcomfy/KotlinSerializationAdapter.kt:72:5
-</span>
-<br />
-<span class="message">
-Line detected that is longer than the defined maximum line length in the code style.
-</span>
-</li>
-<li>
-<span class="location">
-/home/alexxxdev/Android/projects/fuel-comfy/processor/src/main/kotlin/com/github/alexxxdev/fuelcomfy/builder/FunSpecBodyBuilder.kt:114:145
-</span>
-<br />
-<span class="message">
-Line detected that is longer than the defined maximum line length in the code style.
-</span>
-</li>
-<li>
-<span class="location">
-/home/alexxxdev/Android/projects/fuel-comfy/processor/src/main/kotlin/com/github/alexxxdev/fuelcomfy/builder/FunSpecBodyBuilder.kt:164:151
-</span>
-<br />
-<span class="message">
-Line detected that is longer than the defined maximum line length in the code style.
-</span>
-</li>
-</ul>
+
+
+generated with <a href="https://arturbosch.github.io/detekt">detekt version 1.10.0</a> on 2020-07-03 06:05:21 UTC.
 
 </body>
 </html>
