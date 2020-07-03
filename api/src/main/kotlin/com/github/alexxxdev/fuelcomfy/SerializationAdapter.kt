@@ -5,11 +5,31 @@ import com.squareup.kotlinpoet.ParameterizedTypeName
 import com.squareup.kotlinpoet.TypeName
 
 interface SerializationAdapter {
-    fun deserializationAnyClass(returnType: ParameterizedTypeName, statement: (String, Array<Any>) -> Unit, import: (ClassName) -> Unit)
-    fun deserializationClass(returnType: ParameterizedTypeName, statement: (String, Array<Any>) -> Unit, import: (ClassName) -> Unit)
-    fun deserializationList(returnType: ParameterizedTypeName, statement: (String, Array<Any>) -> Unit, import: (ClassName) -> Unit)
-    fun deserializationSet(returnType: ParameterizedTypeName, statement: (String, Array<Any>) -> Unit, import: (ClassName) -> Unit)
-    fun deserializationMap(returnType: ParameterizedTypeName, statement: (String, Array<Any>) -> Unit, import: (ClassName) -> Unit)
+    fun deserializationAnyClass(
+        returnType: ParameterizedTypeName,
+        statement: (String, Array<Any>) -> Unit,
+        import: (ClassName) -> Unit
+    )
+    fun deserializationClass(
+        returnType: ParameterizedTypeName,
+        statement: (String, Array<Any>) -> Unit,
+        import: (ClassName) -> Unit
+    )
+    fun deserializationList(
+        returnType: ParameterizedTypeName,
+        statement: (String, Array<Any>) -> Unit,
+        import: (ClassName) -> Unit
+    )
+    fun deserializationSet(
+        returnType: ParameterizedTypeName,
+        statement: (String, Array<Any>) -> Unit,
+        import: (ClassName) -> Unit
+    )
+    fun deserializationMap(
+        returnType: ParameterizedTypeName,
+        statement: (String, Array<Any>) -> Unit,
+        import: (ClassName) -> Unit
+    )
     fun deserializationParameterizedClass(
         returnType: ParameterizedTypeName,
         statement: (String, Array<Any>) -> Unit,

@@ -13,7 +13,7 @@ jobs:
       uses: MrRamych/gradle-actions/openjdk-8@2.1
       with: 
         args: '"
-        build jacocoTestReport
+        build detektAll
         "'
     - uses: codecov/codecov-action@v1.0.2
       with:

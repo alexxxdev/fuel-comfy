@@ -14,6 +14,7 @@ before_script:
   - chmod +x gradlew
 script:
   - ./gradlew check
+  - ./gradlew detektAll
   - ./gradlew jacocoTestReport
   - ./gradlew sonarqube
 after_success:

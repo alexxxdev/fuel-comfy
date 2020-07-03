@@ -27,7 +27,7 @@ class BodyBuilder(private val serializationAdapter: SerializationAdapter) {
                     Set::class.asTypeName() -> buildForSet(typeName, name, statement, import)
                     Map::class.asTypeName() -> buildForMap(typeName, name, statement, import)
                     ARRAY -> buildForArray(typeName, name, statement, import)
-                    else -> Unit//buildForParameterizedClass(typeName, name, statement, import)
+                    else -> Unit // buildForParameterizedClass(typeName, name, statement, import)
                 }
                 typeName.javaToKotlinType() == Any::class.asTypeName() -> buildForPrimitive(typeName, name, statement, import)
                 typeName.javaToKotlinType() == String::class.asTypeName() -> buildForString(typeName, name, statement, import)
@@ -45,20 +45,35 @@ class BodyBuilder(private val serializationAdapter: SerializationAdapter) {
         }
     }
 
-    private fun buildForClass(typeName: TypeName, name: String, statement: (String, Array<Any>) -> Unit, import: (ClassName) -> Unit) {
+    private fun buildForClass(
+        typeName: TypeName,
+        name: String,
+        statement: (String, Array<Any>) -> Unit,
+        import: (ClassName) -> Unit
+    ) {
         import(ClassName("com.github.kittinunf.fuel.core.extensions", "jsonBody"))
         statement("\t.jsonBody(", arrayOf())
         serializationAdapter.serializationClass(typeName, name, statement, import)
         statement("\t)", arrayOf())
     }
 
-    private fun buildForPrimitive(typeName: TypeName, name: String, statement: (String, Array<Any>) -> Unit, import: (ClassName) -> Unit) {
+    private fun buildForPrimitive(
+        typeName: TypeName,
+        name: String,
+        statement: (String, Array<Any>) -> Unit,
+        import: (ClassName) -> Unit
+    ) {
         statement("\t.body(", arrayOf())
         serializationAdapter.serializationPrimitive(typeName, name, statement, import)
         statement("\t)", arrayOf())
     }
 
-    private fun buildForString(typeName: TypeName, name: String, statement: (String, Array<Any>) -> Unit, import: (ClassName) -> Unit) {
+    private fun buildForString(
+        typeName: TypeName,
+        name: String,
+        statement: (String, Array<Any>) -> Unit,
+        import: (ClassName) -> Unit
+    ) {
         statement("\t.body(", arrayOf())
         serializationAdapter.serializationString(typeName, name, statement, import)
         statement("\t)", arrayOf())
