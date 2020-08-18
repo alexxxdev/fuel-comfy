@@ -7,6 +7,7 @@ import com.github.kittinunf.fuel.core.Method
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
 import okhttp3.mockwebserver.RecordedRequest
+import org.jetbrains.kotlin.cli.common.ExitCode
 import kotlin.test.assertEquals
 import kotlin.test.assertNotNull
 import kotlin.test.assertTrue
@@ -20,7 +21,7 @@ object MethodTest : BaseTest({
         val resultGenerate = generateClass()
         val resultCompile = compileClass()
         kclass = LoadClass<GitHubService>()
-        // test("Generate success") { assertEquals(ExitCode.OK, resultGenerate.exitCode) }
+        test("Generate success") { assertEquals(ExitCode.OK, resultGenerate.exitCode) }
         test("Compile success") { assertTrue(resultCompile) }
         test("Load success") { assertNotNull(kclass) }
     }

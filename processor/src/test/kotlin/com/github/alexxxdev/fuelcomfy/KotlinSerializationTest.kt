@@ -12,6 +12,7 @@ import okhttp3.mockwebserver.Dispatcher
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
 import okhttp3.mockwebserver.RecordedRequest
+import org.jetbrains.kotlin.cli.common.ExitCode
 import kotlin.test.assertEquals
 import kotlin.test.assertNotNull
 import kotlin.test.assertTrue
@@ -24,7 +25,7 @@ object KotlinSerializationTest : BaseTest({
         val resultGenerate = generateClass()
         val resultCompile = compileClass()
         kclass = LoadClass<KotlinSerializationService>()
-        // test("Generate success") { assertEquals(ExitCode.OK, resultGenerate.exitCode) }
+        test("Generate success") { assertEquals(ExitCode.OK, resultGenerate.exitCode) }
         test("Compile success") { assertTrue(resultCompile) }
         test("Load success") { assertNotNull(kclass) }
     }

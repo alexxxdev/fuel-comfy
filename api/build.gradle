@@ -9,8 +9,12 @@ sourceSets {
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
     implementation "org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion"
-    implementation "com.github.kittinunf.fuel:fuel:$fuelVersion"
-    implementation "com.squareup:kotlinpoet:$kotlinpoetVersion"
+    implementation ("com.github.kittinunf.fuel:fuel:$fuelVersion"){
+        exclude group: 'org.jetbrains.kotlin'
+    }
+    implementation ("com.squareup:kotlinpoet:$kotlinpoetVersion"){
+        exclude group: 'org.jetbrains.kotlin'
+    }
     implementation "org.jetbrains.kotlinx:kotlinx-serialization-core:$kotlinxSerializationVersion"
 }
 

@@ -52,6 +52,9 @@ allprojects {
     configurations.all {
         resolutionStrategy {
             force "org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion"
+            force "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
+            force "org.jetbrains.kotlin:kotlinx-serialization-core:$kotlinxSerializationVersion"
+            //force "org.jetbrains.kotlin:kotlin-coroutines-core:1.3.9"
         }
     }
 }

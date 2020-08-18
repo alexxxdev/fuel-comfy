@@ -1,1 +1,3 @@
 include ':api', ':processor', ':processor-coroutines', 'processor-gson'
+
+project(':processor').projectDir = file("$settingsDir/processor")
