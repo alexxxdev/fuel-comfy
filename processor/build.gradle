@@ -13,7 +13,7 @@ dependencies {
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
     implementation "org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion"
-    implementation "org.jetbrains.kotlinx:kotlinx-serialization-runtime:$kotlinxSerializationVersion"
+    implementation "org.jetbrains.kotlinx:kotlinx-serialization-core:$kotlinxSerializationVersion"
     implementation "com.github.kittinunf.fuel:fuel:$fuelVersion"
     implementation "com.github.kittinunf.fuel:fuel-kotlinx-serialization:$fuelVersion"
     implementation "com.squareup:kotlinpoet:$kotlinpoetVersion"
@@ -32,14 +32,14 @@ dependencies {
     testImplementation "com.github.kittinunf.fuel:fuel:$fuelVersion"
     testImplementation "com.github.kittinunf.fuel:fuel-kotlinx-serialization:$fuelVersion"
     testImplementation "com.github.kittinunf.fuel:fuel-coroutines:$fuelVersion"
-    testImplementation "org.jetbrains.kotlinx:kotlinx-serialization-runtime:$kotlinxSerializationVersion"
+    testImplementation "org.jetbrains.kotlinx:kotlinx-serialization-core:$kotlinxSerializationVersion"
 
     testRuntimeOnly "org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion"
     testImplementation "org.jetbrains.kotlin:kotlin-annotation-processing-embeddable:$kotlinVersion"
     testImplementation "org.jetbrains.kotlin:kotlin-compiler-embeddable:$kotlinVersion"
     testImplementation "org.jetbrains.kotlin:kotlin-test:$kotlinVersion"
     testImplementation files(org.gradle.internal.jvm.Jvm.current().toolsJar)
-    testImplementation "org.jetbrains.kotlinx:kotlinx-serialization-runtime:$kotlinxSerializationVersion"
+    testImplementation "org.jetbrains.kotlinx:kotlinx-serialization-core:$kotlinxSerializationVersion"
     testImplementation "com.squareup.okhttp3:mockwebserver:$mockwebserver"
     testImplementation "com.squareup.okio:okio:$okio"
 }

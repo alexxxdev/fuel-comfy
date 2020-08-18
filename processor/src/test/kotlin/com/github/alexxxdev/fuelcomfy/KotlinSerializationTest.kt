@@ -8,7 +8,6 @@ import com.github.kittinunf.result.Result
 import kotlinx.serialization.builtins.MapSerializer
 import kotlinx.serialization.builtins.serializer
 import kotlinx.serialization.json.Json
-import kotlinx.serialization.json.JsonConfiguration
 import okhttp3.mockwebserver.Dispatcher
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
@@ -37,13 +36,13 @@ object KotlinSerializationTest : BaseTest({
                 override fun dispatch(request: RecordedRequest): MockResponse {
                     return MockResponse()
                         .setResponseCode(200)
-                        .setBody(Json.stringify(String.serializer(), "123"))
+                        .setBody(Json.encodeToString(String.serializer(), "123"))
                 }
             }
 
             server.start(port)
             FuelManager.instance.basePath = "http://localhost:$port"
-            SerializationStrategy.json = Json(JsonConfiguration.Stable.copy(isLenient = true))
+            SerializationStrategy.json = Json { isLenient = true }
             response = kclass?.postStringFun("user")
         }
         test("response not null") {
@@ -65,14 +64,14 @@ object KotlinSerializationTest : BaseTest({
                 override fun dispatch(request: RecordedRequest): MockResponse {
                     return MockResponse()
                         .setResponseCode(200)
-                        .setBody(Json.stringify(MapSerializer(Int.serializer(), User.serializer()), userMap))
+                        .setBody(Json.encodeToString(MapSerializer(Int.serializer(), User.serializer()), userMap))
                 }
             }
 
             server.start(port)
 
             FuelManager.instance.basePath = "http://localhost:$port"
-            SerializationStrategy.json = Json(JsonConfiguration.Stable.copy(isLenient = true))
+            SerializationStrategy.json = Json { isLenient = true }
             response = kclass?.postUsersMapFun(userMap)
         }
         test("response not null") {

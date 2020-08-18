@@ -1,8 +1,8 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
-    ext.kotlinVersion = '1.3.72'
-    ext.kotlinxSerializationVersion = '0.20.0'
+    ext.kotlinVersion = '1.4.0'
+    ext.kotlinxSerializationVersion = '1.0.0-RC'
     ext.detektGradlePluginVersion = '1.11.2'
     ext.gradleVersionsPlugin = '0.27.0'
     ext.kotlinpoetVersion = '1.6.0'
