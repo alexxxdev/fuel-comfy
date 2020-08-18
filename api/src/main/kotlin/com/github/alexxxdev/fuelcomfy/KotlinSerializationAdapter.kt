@@ -10,11 +10,11 @@ const val BUILTINS = "kotlinx.serialization.builtins"
 
 class KotlinSerializationAdapter : SerializationAdapter {
     private val kotlinxDeserializerOf = ClassName("com.github.kittinunf.fuel.serialization", "kotlinxDeserializerOf")
-    private val listClassName = ClassName(BUILTINS, "list")
-    private val setClassName = ClassName(BUILTINS, "set")
+    private val setClassName = ClassName(BUILTINS, "SetSerializer")
     private val mapSerializerClassName = ClassName(BUILTINS, "MapSerializer")
     private val serializerClassName = ClassName(BUILTINS, "serializer")
     private val jsonClassName = ClassName("kotlinx.serialization.json", "Json")
+    private val listSerializerClassName = ClassName("kotlinx.serialization.builtins", "ListSerializer")
 
     override fun deserializationAnyClass(
         returnType: ParameterizedTypeName,
@@ -43,14 +43,15 @@ class KotlinSerializationAdapter : SerializationAdapter {
         statement: (String, Array<Any>) -> Unit,
         import: (ClassName) -> Unit
     ) {
-        import(listClassName)
+        import(listSerializerClassName)
         import(jsonClassName)
         val parameterizedType = returnType.typeArguments[0] as ParameterizedTypeName
         statement(
-            "\t\t%T<%T>(%T.serializer().list, %T.json)",
+            "\t\t%T<%T>(%T(%T.serializer()), %T.json)",
             arrayOf(
                 kotlinxDeserializerOf,
                 returnType.typeArguments[0],
+                listSerializerClassName,
                 parameterizedType.typeArguments[0],
                 SerializationStrategy::class.asClassName()
             )
@@ -66,10 +67,11 @@ class KotlinSerializationAdapter : SerializationAdapter {
         import(jsonClassName)
         val parameterizedType = returnType.typeArguments[0] as ParameterizedTypeName
         statement(
-            "\t\t%T<%T>(%T.serializer().set, %T.json)",
+            "\t\t%T<%T>(%T(%T.serializer()), %T.json)",
             arrayOf(
                 kotlinxDeserializerOf,
                 returnType.typeArguments[0],
+                setClassName,
                 parameterizedType.typeArguments[0],
                 SerializationStrategy::class.asClassName()
             )
@@ -121,15 +123,16 @@ class KotlinSerializationAdapter : SerializationAdapter {
         statement: (String, Array<Any>) -> Unit,
         import: (ClassName) -> Unit
     ) {
-        import(listClassName)
+        import(listSerializerClassName)
         import(jsonClassName)
         val parameterizedType = returnType.typeArguments[0] as ParameterizedTypeName
         statement(
-            "\t\t%T<%T>(%T.serializer(%T.serializer().list), %T.json)",
+            "\t\t%T<%T>(%T.serializer(%T(%T.serializer())), %T.json)",
             arrayOf(
                 kotlinxDeserializerOf,
                 returnType.typeArguments[0],
                 parameterizedType.rawType.javaToKotlinType(),
+                listSerializerClassName,
                 (parameterizedType.typeArguments[0] as ParameterizedTypeName).typeArguments[0].javaToKotlinType(),
                 SerializationStrategy::class.asClassName()
             )
@@ -145,11 +148,12 @@ class KotlinSerializationAdapter : SerializationAdapter {
         import(jsonClassName)
         val parameterizedType = returnType.typeArguments[0] as ParameterizedTypeName
         statement(
-            "\t\t%T<%T>(%T.serializer(%T.serializer().set), %T.json)",
+            "\t\t%T<%T>(%T.serializer(%T(%T.serializer())), %T.json)",
             arrayOf(
                 kotlinxDeserializerOf,
                 returnType.typeArguments[0],
                 parameterizedType.rawType.javaToKotlinType(),
+                setClassName,
                 (parameterizedType.typeArguments[0] as ParameterizedTypeName).typeArguments[0].javaToKotlinType(),
                 SerializationStrategy::class.asClassName()
             )
@@ -185,7 +189,7 @@ class KotlinSerializationAdapter : SerializationAdapter {
         import: (ClassName) -> Unit
     ) {
         import(serializerClassName)
-        statement("\t\t%T.stringify(%T.serializer(), %N)", arrayOf(Json::class, typeName.javaToKotlinType(), name))
+        statement("\t\t%T.encodeToString(%T.serializer(), %N)", arrayOf(Json::class, typeName.javaToKotlinType(), name))
     }
 
     override fun serializationString(
@@ -213,10 +217,10 @@ class KotlinSerializationAdapter : SerializationAdapter {
         statement: (String, Array<Any>) -> Unit,
         import: (ClassName) -> Unit
     ) {
-        import(listClassName)
+        import(listSerializerClassName)
         statement(
-            "\t\t%T.stringify(%T.serializer().list, %N.toList())",
-            arrayOf(Json::class, typeName.typeArguments[0].javaToKotlinType(), name)
+            "\t\t%T.encodeToString(%T(%T.serializer()), %N.toList())",
+            arrayOf(Json::class, listSerializerClassName, typeName.typeArguments[0].javaToKotlinType(), name)
         )
     }
 
@@ -226,10 +230,10 @@ class KotlinSerializationAdapter : SerializationAdapter {
         statement: (String, Array<Any>) -> Unit,
         import: (ClassName) -> Unit
     ) {
-        import(listClassName)
+        import(listSerializerClassName)
         statement(
-            "\t\t%T.stringify(%T.serializer().list, %N)",
-            arrayOf(Json::class, typeName.typeArguments[0].javaToKotlinType(), name)
+            "\t\t%T.encodeToString(%T(%T.serializer()), %N)",
+            arrayOf(Json::class, listSerializerClassName, typeName.typeArguments[0].javaToKotlinType(), name)
         )
     }
 
@@ -241,8 +245,8 @@ class KotlinSerializationAdapter : SerializationAdapter {
     ) {
         import(setClassName)
         statement(
-            "\t\t%T.stringify(%T.serializer().set, %N)",
-            arrayOf(Json::class, typeName.typeArguments[0].javaToKotlinType(), name)
+            "\t\t%T.encodeToString(%T(%T.serializer()), %N)",
+            arrayOf(Json::class, setClassName, typeName.typeArguments[0].javaToKotlinType(), name)
         )
     }
 
@@ -255,7 +259,7 @@ class KotlinSerializationAdapter : SerializationAdapter {
         import(mapSerializerClassName)
         import(serializerClassName)
         statement(
-            "\t\t%T.stringify(MapSerializer(%T.serializer(), %T.serializer()), %N)",
+            "\t\t%T.encodeToString(MapSerializer(%T.serializer(), %T.serializer()), %N)",
             arrayOf(
                 Json::class,
                 typeName.typeArguments[0].javaToKotlinType(),

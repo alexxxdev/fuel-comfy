@@ -30,7 +30,7 @@ internal class KotlinCompilerCall(var scratchDir: File) {
     val services = LinkedHashMultimap.create<KClass<*>, KClass<*>>()
 
     init {
-        kaptArgs += mutableMapOf("kapt.kotlin.generated" to "./build/kapt/sources")
+        kaptArgs += mutableMapOf("kapt.kotlin.generated" to "$scratchDir/build/kapt/sources")
     }
 
     fun addKt(path: String, source: String) {
