@@ -3,7 +3,7 @@
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-fuel--comfy-brightgreen.svg?style=flat)](https://android-arsenal.com/details/1/7637)
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Falexxxdev%2Ffuel-comfy.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Falexxxdev%2Ffuel-comfy?ref=badge_shield)
 [![License](https://img.shields.io/badge/license-Apache%202-4EB1BA.svg?style=flat-flat)](https://www.apache.org/licenses/LICENSE-2.0.html)  
-[![Build Status](https://travis-ci.org/alexxxdev/fuel-comfy.svg?branch=master)](https://travis-ci.org/alexxxdev/fuel-comfy)
+[![Build Status](https://travis-ci.com/alexxxdev/fuel-comfy.svg?branch=master)](https://travis-ci.com/alexxxdev/fuel-comfy)
 ![Build Status](https://action-badges.now.sh/alexxxdev/fuel-comfy)
 [![Hits-of-Code](https://hitsofcode.com/github/alexxxdev/fuel-comfy)](https://hitsofcode.com/view/github/alexxxdev/fuel-comfy)  
 [![codecov](https://codecov.io/gh/alexxxdev/fuel-comfy/branch/master/graph/badge.svg)](https://codecov.io/gh/alexxxdev/fuel-comfy)
