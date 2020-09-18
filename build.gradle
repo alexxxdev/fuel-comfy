@@ -9,7 +9,7 @@ buildscript {
     ext.fuelVersion = '2.2.3'
     ext.spekVersion = '2.0.12'
     ext.okio = '2.8.0'
-    ext.mockwebserver = '4.8.1'
+    ext.mockwebserver = '4.9.0'
 
     repositories {
         maven { url "https://kotlin.bintray.com/kotlinx" }
