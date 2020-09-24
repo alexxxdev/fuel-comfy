@@ -12,38 +12,40 @@ import kotlin.test.assertEquals
 import kotlin.test.assertNotNull
 import kotlin.test.assertTrue
 
-object PathTest : BaseTest({
-    val port = 10101
-    var kclass: GitHubService? = null
-    FuelManager.instance.basePath = "http://localhost:$port/"
+object PathTest : BaseTest(
+    {
+        val port = 10101
+        var kclass: GitHubService? = null
+        FuelManager.instance.basePath = "http://localhost:$port/"
 
-    group("Prepare class") {
-        val resultGenerate = generateClass()
-        val resultCompile = compileClass()
-        kclass = LoadClass<GitHubService>()
-        test("Generate success") { assertEquals(ExitCode.OK, resultGenerate.exitCode) }
-        test("Compile success") { assertTrue(resultCompile) }
-        test("Load success") { assertNotNull(kclass) }
+        group("Prepare class") {
+            val resultGenerate = generateClass()
+            val resultCompile = compileClass()
+            kclass = LoadClass<GitHubService>()
+            test("Generate success") { assertEquals(ExitCode.OK, resultGenerate.exitCode) }
+            test("Compile success") { assertTrue(resultCompile) }
+            test("Load success") { assertNotNull(kclass) }
+        }
+        group("GET Request with params headers") {
+            var request: RecordedRequest? = null
+            val server = MockWebServer()
+
+            beforeGroup {
+                server.enqueue(MockResponse().setResponseCode(200))
+                server.start(port)
+
+                kclass?.getFunWithParams("alexxxdev", "repo")
+                request = server.takeRequest()
+            }
+            test("method = GET") {
+                assertEquals(Method.GET.value, request?.method)
+            }
+            test("path = /get/alexxxdev/repo") {
+                assertEquals("/get/alexxxdev/repo", request?.path)
+            }
+            afterGroup {
+                server.shutdown()
+            }
+        }
     }
-    group("GET Request with params headers") {
-        var request: RecordedRequest? = null
-        val server = MockWebServer()
-
-        beforeGroup {
-            server.enqueue(MockResponse().setResponseCode(200))
-            server.start(port)
-
-            kclass?.getFunWithParams("alexxxdev", "repo")
-            request = server.takeRequest()
-        }
-        test("method = GET") {
-            assertEquals(Method.GET.value, request?.method)
-        }
-        test("path = /get/alexxxdev/repo") {
-            assertEquals("/get/alexxxdev/repo", request?.path)
-        }
-        afterGroup {
-            server.shutdown()
-        }
-    }
-})
+)

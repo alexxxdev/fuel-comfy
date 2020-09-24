@@ -26,7 +26,8 @@ internal object JvmCompile {
         execImpl(
             PrintingMessageCollector(
                 System.out,
-                MessageRenderer.WITHOUT_PATHS, true
+                MessageRenderer.WITHOUT_PATHS,
+                true
             ),
             Services.EMPTY,
             args

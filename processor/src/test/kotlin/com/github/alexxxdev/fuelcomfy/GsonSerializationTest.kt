@@ -7,15 +7,17 @@ import kotlin.test.assertEquals
 import kotlin.test.assertNotNull
 import kotlin.test.assertTrue
 
-object GsonSerializationTest : BaseTest({
-    var kclass: GsonSerializationService?
+object GsonSerializationTest : BaseTest(
+    {
+        var kclass: GsonSerializationService?
 
-    group("Prepare class with suspend functions") {
-        val resultGenerate = generateClass()
-        val resultCompile = compileClass()
-        kclass = LoadClass<GsonSerializationService>()
-        test("Generate success") { assertEquals(ExitCode.OK, resultGenerate.exitCode) }
-        test("Compile success") { assertTrue(resultCompile) }
-        test("Load success") { assertNotNull(kclass) }
+        group("Prepare class with suspend functions") {
+            val resultGenerate = generateClass()
+            val resultCompile = compileClass()
+            kclass = LoadClass<GsonSerializationService>()
+            test("Generate success") { assertEquals(ExitCode.OK, resultGenerate.exitCode) }
+            test("Compile success") { assertTrue(resultCompile) }
+            test("Load success") { assertNotNull(kclass) }
+        }
     }
-})
+)
