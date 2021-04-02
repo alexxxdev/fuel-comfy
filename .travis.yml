@@ -17,7 +17,14 @@ script:
   - ./gradlew detektAll
   - ./gradlew jacocoTestReport  
   - wget https://github.com/sormuras/bach/raw/master/install-jdk.sh && . ./install-jdk.sh -F 11 -L GPL
-  - ./gradlew sonarqube
+  - ./gradlew -Dorg.gradle.java.home=/Library/Java/JavaVirtualMachines/jdk-11.0.7.jdk/Contents/Home module:sonarqube \
+-x kaptDevDebugKotlin \
+-x compileDevDebugJavaWithJavac \
+-x kaptDevDebugAndroidTestKotlin \
+-x compileDevDebugAndroidTestKotlin \
+-x compileDevDebugAndroidTestJavaWithJavac \
+-x compileDevDebugUnitTestKotlin \
+-x compileDevDebugUnitTestJavaWithJavac
 after_success:
   - bash <(curl -s https://codecov.io/bash)
   - java -jar ~/codacy-coverage-reporter-assembly-latest.jar report -l Java -r processor/build/reports/jacoco/test/jacocoTestReport.xml
