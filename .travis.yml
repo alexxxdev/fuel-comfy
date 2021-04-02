@@ -2,11 +2,6 @@ dist: trusty
 language: java
 jdk:
   - openjdk8
-addons:
-  sonarcloud:
-    organization: "alexxxdev"
-    token:
-      secure: "ApBdVq++RO73rwvltKhdFwKt4qmuv6wtUMoPHJmvurs0Md3ArBpUumIF4l2z6HtDihdH5HTJBwm5DmpV03m3/fh9vlwAFKqmqnK++cz1tLze8TvlXRYowTJOiuWuDncEzqD0/xdsEx/foUWSDCgrzhKdJ4lXqPlReaehysPewsncWxthsgURsjW1cWemYsfA2zmColfxdHrP2koMkygMjrpbbmsb9amw3e0ttyGmx9rku+a7hHTPRpeKApWRjFW2w+dlM0k3TBpS+PMeBKc8Lo3IouyMd10EOd9QOUtTgyOiGv+lWb9IzTBTw1NSdOUK6SwBNEM91FXXDiS7cHdqNMI1JUi/j1BVSfOiKi8T8YPcX+2A7lB7TPC0xzBILdLdSiUTjTPEfhfo86+y0tt4g8PhOxQYLV8SkV95Zw4iwpNg/0uMwIeZrxeMmd9fUictSoWUaMfRG5YXUfUVWxx9C7BU/m3l3Zd6bTUSZ7Z0VUEkTivckJ2X0hsqRt1pocd2T9jaA+SfEa3X52B5DN5e4jw0kJfmWT0Fb155D4IqesA6+7juXkpQx7qLAFwSLrt3HCsoODRFkIT3+WdN1iAuoH2rzfu+wKWZQ8OFqefh9mSh4Xl+CWcofEPq4Z4+d1a/U7uX3PNi/Iq4a2tC0y8oW5dLoPK2IBKOuGLp/G/eKpo="      
 before_install:
   - sudo apt-get install jq
   - wget -O ~/codacy-coverage-reporter-assembly-latest.jar $(curl https://api.github.com/repos/codacy/codacy-coverage-reporter/releases/latest | jq -r '.assets[0].browser_download_url')
@@ -15,9 +10,7 @@ before_script:
 script:
   - ./gradlew check
   - ./gradlew detektAll
-  - ./gradlew jacocoTestReport  
-  - wget https://github.com/sormuras/bach/raw/master/install-jdk.sh && . ./install-jdk.sh -F 11 -L GPL
-  - ./gradlew sonarqube -x kaptDevDebugKotlin -x compileDevDebugJavaWithJavac -x kaptDevDebugAndroidTestKotlin -x compileDevDebugAndroidTestKotlin -x compileDevDebugAndroidTestJavaWithJavac -x compileDevDebugUnitTestKotlin -x compileDevDebugUnitTestJavaWithJavac
+  - ./gradlew jacocoTestReport
 after_success:
   - bash <(curl -s https://codecov.io/bash)
   - java -jar ~/codacy-coverage-reporter-assembly-latest.jar report -l Java -r processor/build/reports/jacoco/test/jacocoTestReport.xml
