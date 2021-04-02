@@ -15,9 +15,10 @@ before_script:
 script:
   - ./gradlew check
   - ./gradlew detektAll
-  - ./gradlew jacocoTestReport
-  - ./gradlew sonarqube
+  - ./gradlew jacocoTestReport  
+  - wget https://github.com/sormuras/bach/raw/master/install-jdk.sh && . ./install-jdk.sh -F 11 -L GPL
 after_success:
+  - sonar-scanner
   - bash <(curl -s https://codecov.io/bash)
   - java -jar ~/codacy-coverage-reporter-assembly-latest.jar report -l Java -r processor/build/reports/jacoco/test/jacocoTestReport.xml
 before_cache:
